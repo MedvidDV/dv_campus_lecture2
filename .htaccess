@@ -143,6 +143,12 @@
     Options +FollowSymLinks
     RewriteEngine on
 
+    SetEnvIf Host .*medvid-first-project.local.* MAGE_RUN_CODE=base
+    SetEnvIf Host .*medvid-first-project.local.* MAGE_RUN_TYPE=website
+
+    SetEnvIf Host .*medvid-sergii.local.* MAGE_RUN_CODE=additional_website
+    SetEnvIf Host .*medvid-sergii.local.* MAGE_RUN_TYPE=website
+
 ############################################
 ## you can put here your magento root folder
 ## path relative to web root

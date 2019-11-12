@@ -1,5 +1,5 @@
 # SSL certificates for development
-# $ mkcert medvid-first-project.local www.medvid-first-project.local
+# $ mkcert medvid-first-project.local www.medvid-first-project.local medvid-sergii.local www.medvid-sergii.local
 #
 # DEVELOPMENT:
 # $ docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
@@ -24,15 +24,15 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      - traefik.http.frontend.rule=Host:medvid-first-project.local,www.medvid-first-project.local
+      - traefik.http.frontend.rule=Host:medvid-first-project.local,www.medvid-first-project.local,medvid-sergii.local,www.medvid-sergii.local
       - traefik.http.frontend.entryPoints=http
-      - traefik.https.frontend.rule=Host:medvid-first-project.local,www.medvid-first-project.local
+      - traefik.https.frontend.rule=Host:medvid-first-project.local,www.medvid-first-project.local,medvid-sergii.local,www.medvid-sergii.local
       - traefik.https.frontend.entryPoints=https
       - traefik.https.protocol=https
       - traefik.https.port=443
     # Must add extra_hosts to be written to /etc/hosts - otherwise containerized application can not curl itself
     extra_hosts:
-      - "medvid-first-project.local www.medvid-first-project.local:127.0.0.1"
+      - "medvid-first-project.local www.medvid-first-project.local medvid-sergii.local www.medvid-sergii.local:127.0.0.1 "
 #    links:
 #      - memcached
     external_links:
