@@ -1,0 +1,100 @@
+@color-blue-dark: #00008b;
+@color-orange-magento: #ff5501;
+@color-warning: #ffcccb;
+@link-hover-decoration: underline;
+
+@color-layout-primary: @theme__color__primary;
+@color-layout-secondary: @color-blue-dark;
+@color-layout-neutral: @color-white;
+@color-text-primary: @color-white;
+@color-text-alt: @color-black;
+@color-accent: @color-orange-magento;
+
+// Navigation
+
+@navigation__background: @color-layout-primary;
+@navigation-desktop-level0-item__hover__background: @color-layout-primary;
+@navigation-level0-item__color: @color-text-primary;
+@navigation-level0-item__hover__color: @color-text-primary;
+@navigation-level0-item__active__color: @color-text-primary;
+@navigation-desktop-level0-item__color: @color-text-primary;
+@navigation-desktop-level0-item__hover__color: @color-text-primary;
+@navigation-desktop-level0-item__hover__text-decoration: @link-hover-decoration;
+
+@submenu-item__color: @color-text-primary;
+@submenu-item__active__color: @color-text-primary;
+@submenu-desktop__background: @color-layout-primary;
+@submenu-desktop-item__hover__background:  @color-layout-primary;
+@submenu-desktop-item__hover__text-decoration: @link-hover-decoration;
+@submenu-desktop-item__active__color: @color-text-primary;
+
+// Accordion
+
+@tab-control__background-color: @color-layout-secondary;
+@tab-control__color: @color-text-primary;
+@tab-control__active__background-color: @color-layout-primary;
+@tab-control__active__color: @color-text-primary;
+@tab-control__hover__background-color: @color-layout-primary;
+@accordion-content__background-color: @color-layout-neutral;
+@tab-content__background-color: @color-layout-neutral;
+
+// Link color
+
+@link__color: @color-accent;
+@footer-links-color: @color-text-primary;
+@footer-links-color-hover: @color-text-primary;
+
+// Header and Footer background
+
+@footer__background-color: @color-layout-primary;
+@header-panel__background-color: @color-layout-secondary;
+@copyright__background-color: @color-layout-secondary;
+
+// Messages
+
+@message-success__background: @color-layout-secondary;
+@message-success__color: @color-text-primary;
+@message-success-icon__color-inner: @color-layout-neutral;
+@message-success-link__color: @color-text-primary;
+@message-success-link__color-hover:@color-text-primary;
+@message-success-link__color-active: @color-text-primary;
+
+@message-info__background: @color-layout-primary;
+@message-info__color: @color-text-primary;
+@message-info-icon__color-inner: @color-layout-neutral;
+@message-info-link__color: @color-text-primary;
+@message-info-link__color-hover:@color-text-primary;
+@message-info-link__color-active: @color-text-primary;
+
+@message-warning__background: @color-warning;
+@message-warning__color: @color-text-alt;
+@message-warning-icon__color-inner: @color-layout-neutral;
+@message-warning-link__color: @color-text-alt;
+@message-warning-link__color-hover: @color-text-alt;
+@message-warning-link__color-active: @color-text-alt;
+
+@message-error__background: @color-warning;
+@message-error__color: @color-text-alt;
+@message-error-icon__color-inner: @color-layout-neutral;
+@message-error-link__color: @color-text-alt;
+@message-error-link__color-hover: @color-text-alt;
+@message-error-link__color-active: @color-text-alt;
+
+
+& when (@media-common = true) {
+    .section-item-title.nav-sections-item-title {
+        &.active {
+            text-decoration: underline;
+        }
+        a {
+            color: @color-text-primary;
+        }
+    }
+    .data.switch .counter {
+        color: @color-text-primary;
+    }
+
+    .greet.welcome {
+        color: @color-text-primary;
+    }
+ }
