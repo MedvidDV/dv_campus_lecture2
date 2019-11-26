@@ -99,4 +99,15 @@
     .greet.welcome {
         color: @color-text-primary;
     }
+
+    .left-column-banner {
+        display: none;
+    }
  }
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .left-column-banner {
+        display: block;
+        text-align: center;
+    }
+}

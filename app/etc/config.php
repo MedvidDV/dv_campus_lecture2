@@ -243,6 +243,9 @@ return [
         'Klarna_Kp' => 1,
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
+        'Medvids_Catalog' => 1,
+        'Medvids_Cms' => 1,
+        'Medvids_Newsletter' => 1,
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1,
         'Yotpo_Yotpo' => 1

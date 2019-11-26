@@ -1,0 +1,19 @@
+& when (@media-common = true) {
+    .block.newsletter {
+        .title {
+            color: @color-layout-primary;
+            display: block;
+            strong {
+                font-size: 1.3em;
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block.newsletter {
+        .title {
+            color: @color-text-primary;
+        }
+    }
+}
