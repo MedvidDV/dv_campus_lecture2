@@ -1,0 +1,14 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+
+<h2><?= $block->escapeHtml(__('The result from Forwarding Controller:')) ?></h2>
+<ul>
+    <li>
+        <?= $block->escapeHtml(__('Name: %1 %2', $block->getData('$firstName'), $block->getData('$lastName'))) ?>
+    </li>
+    <li>
+        <?= $block->escapeHtml(__('Repository: ')) ?>
+        <a href="<?= $block->escapeHtml(__($block->getData('$repository'))) ?>">
+            <?= $block->escapeHtml(__($block->getData('$repository'))) ?>
+        </a>
+    </li>
+</ul>
