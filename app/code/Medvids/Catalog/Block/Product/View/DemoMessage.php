@@ -8,7 +8,6 @@ namespace Medvids\Catalog\Block\Product\View;
  *
  * @method string getDemoMessage()
  */
-
 class DemoMessage extends \Magento\Framework\View\Element\Template
 {
 

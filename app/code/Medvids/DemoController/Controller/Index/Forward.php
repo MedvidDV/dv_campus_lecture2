@@ -8,7 +8,6 @@ use Magento\Framework\Controller\Result\Forward as ForwardResult;
 
 class Forward extends \Magento\Framework\App\Action\Action
 {
-
     /**
      * @inheritDoc
      */
