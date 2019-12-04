@@ -1,0 +1,21 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+<h4><span><?= $block->escapeHtml(__('Want to be a dealer?')) ?></span></h4>
+<div class="actions-toolbar">
+    <div class="primary">
+        <button class="action primary"
+                id="dealerRegister"
+                type="button"
+                title="<?= $block->escapeHtml(__('Register as Dealer')) ?>"
+                data-mage-init='{"dealer-popup":{}}'>
+            <span><?= $block->escapeHtml(__('Register as Dealer')) ?></span>
+        </button>
+    </div>
+</div>
+
+<!--<script type="text/x-magento-init">
+    {
+        "#dealerRegister": {
+            "dealer-popup": {}
+        }
+    }
+</script> -->
