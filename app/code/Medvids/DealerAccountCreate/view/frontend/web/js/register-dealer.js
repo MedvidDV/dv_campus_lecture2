@@ -12,8 +12,6 @@ define([
         buttons: []
     };
 
-    $('#dealerRegisterModal').empty();
-
     modal(config, $('#dealerRegisterModal'));
     $('#dealerRegister').on('click', function () {
         $('#dealerRegisterModal').modal('openModal');
