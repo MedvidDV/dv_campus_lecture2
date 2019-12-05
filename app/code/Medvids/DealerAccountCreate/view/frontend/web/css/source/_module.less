@@ -1,7 +1,20 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    #dealerRegisterModal {
-        form {
-            margin: 0 auto;
-        }
-    }
+
+
+   .modals-wrapper {
+       aside[role="dialog"] {
+           .modal-inner-wrap {
+               display: inline-flex;
+               width: auto;
+               right: auto;
+               left: 50%;
+               transform: translateX(-50%);
+
+               .mage-error {
+                   word-wrap: normal;
+                   max-width: 600px;
+               }
+           }
+       }
+   }
 }
