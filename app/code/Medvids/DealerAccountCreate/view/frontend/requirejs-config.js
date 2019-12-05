@@ -1,5 +1,7 @@
 let config = {
-    paths: {
-        "dealer-popup": "Medvids_DealerAccountCreate/js/register-dealer"
+    map: {
+        '*': {
+            'dealer-popup': 'Medvids_DealerAccountCreate/js/register-dealer'
+        }
     }
 };
