@@ -243,6 +243,7 @@ return [
         'Klarna_Kp' => 1,
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
+        'Medvids_AskQuestion' => 1,
         'Medvids_Catalog' => 1,
         'Medvids_Cms' => 1,
         'Medvids_DealerAccountCreate' => 1,
