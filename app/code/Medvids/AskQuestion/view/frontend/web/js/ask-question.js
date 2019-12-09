@@ -11,7 +11,6 @@ define([
         options: {
             cookieName: 'question_sent',
             cookieDuration: 120,
-            cookieExp: 0
         },
 
         /**
@@ -32,7 +31,6 @@ define([
             }
 
             if ($.mage.cookies.get(this.options.cookieName)) {
-                console.log(document.cookie);
                 alert({
                     title: $.mage.__('Limit reached'),
                     content: $.mage.__('I\'m sorry, but your limit for question is reached.' +
@@ -48,10 +46,8 @@ define([
         /**
          * Submit request via AJAX. Add form key to the post data
          */
-
         ajaxSubmit: function () {
-            var formData = new FormData($(this.element).get(0)),
-                self = this;
+            var formData = new FormData($(this.element).get(0));
 
             formData.append('form_key', $.mage.cookies.get('form_key'));
 
@@ -76,7 +72,7 @@ define([
                         title: $.mage.__(response.status),
                         content: $.mage.__(response.message)
                     });
-                    $(self.element)[0].reset();
+                    $(this.element)[0].reset();
 
                     //this.options.cookieExp = new Date().getTime() + this.options.cookieDuration * 1000;
 

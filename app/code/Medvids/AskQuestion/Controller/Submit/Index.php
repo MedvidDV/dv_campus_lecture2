@@ -18,12 +18,12 @@ class Index extends \Magento\Framework\App\Action\Action
 
     /**
      * Index constructor.
-     * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Magento\Framework\App\Action\Context $context
      */
     public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magento\Framework\App\Action\Context $context
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
@@ -38,13 +38,14 @@ class Index extends \Magento\Framework\App\Action\Action
             }
             $data = [
                 'status' => self::STATUS_SUCCESS,
-                'message' => 'Form submitted'
+                'message' => __('Form submitted')
             ];
 
-        } catch (LocalizedException $e) {
+        } catch (\Exception $e) {
+
             $data = [
                 'status' => self::STATUS_ERROR,
-                'message' => $e->getMessage()
+                'message' => __('Something went wrong, Please contact us if the issue persists')
             ];
         }
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);

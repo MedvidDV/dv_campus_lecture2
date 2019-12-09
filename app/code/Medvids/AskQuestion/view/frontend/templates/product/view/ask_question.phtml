@@ -4,7 +4,7 @@
     <div class="block-content">
         <form
               class="review-form"
-              action="<?= $block->getUrl('ask_question/submit') ?>"
+              action="<?= $block->escapeHtmlAttr($block->getUrl('ask_question/submit')) ?>"
               method="post"
               id="question-form"
               data-mage-init='{"askQuestion": {}}'
@@ -37,7 +37,8 @@
                     </div>
                 </div>
                 <div class="field required">
-                    <label for="phone_field_question" class="label"><span><?= $block->escapeHtml(__('Phone')) ?></span></label>
+                    <label for="phone_field_question" class="label">
+                        <span><?= $block->escapeHtml(__('Phone')) ?></span></label>
                     <div class="control">
                         <input type="tel"
                                name="tel_question"
@@ -51,20 +52,24 @@
                 </div>
 
                 <div class="field required">
-                    <label for="question_field_question" class="label"><span><?= $block->escapeHtml(__('Your Question')) ?></span></label>
+                    <label for="question_field_question" class="label">
+                        <span><?= $block->escapeHtml(__('Your Question')) ?></span>
+                    </label>
                     <div class="control">
                         <textarea name="question_question"
                                   id="question_field_question"
                                   cols="5"
                                   rows="3"
-                                  placeholder="My question is..."
+                                  placeholder="<?= $block->escapeHtmlAttr(__(' My question is...')) ?>"
                                   data-validate="{required:true}" ></textarea>
                     </div>
                 </div>
             </fieldset>
             <div class="actions-toolbar">
                 <div class="primary actions-primary">
-                    <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Ask Question')) ?></span></button>
+                    <button type="submit" class="action submit primary">
+                        <span><?= $block->escapeHtml(__('Ask Question')) ?></span>
+                    </button>
                 </div>
             </div>
         </form>
