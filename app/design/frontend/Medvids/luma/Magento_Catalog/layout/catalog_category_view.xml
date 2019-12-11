@@ -9,7 +9,8 @@
             />
         </referenceContainer>
 
-<!-- Remove after testing -->
+<!-- Remove after testing
         <referenceBlock name="new.ko.component" remove="true" />
+        -->
     </body>
 </page>
