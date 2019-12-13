@@ -1,0 +1,36 @@
+& when (@media-common = true) {
+    .banner-promo {
+        img {
+            object-fit: unset;
+            max-height: unset;
+            width: 100%;
+        }
+    }
+    .banner-content {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 75%;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .banner-promo {
+        img {
+            object-fit: cover;
+            max-height: 550px;
+            width: 100%;
+        }
+    }
+
+    .banner-content {
+        padding: 45px;
+        right: 45px;
+        top: 45px;
+        width: auto;
+
+    }
+}
+

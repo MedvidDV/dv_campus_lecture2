@@ -9,7 +9,7 @@
                    template="Medvids_Cms::demo_notice.phtml">
             </block>
         </referenceContainer>
-
+        <!-- rewrite by cms admin widget
         <referenceContainer name="sidebar.additional">
             <block class="Magento\Cms\Block\Block"
                    name="left_column_image"
@@ -19,5 +19,6 @@
                 </arguments>
             </block>
         </referenceContainer>
+        -->
     </body>
 </page>
