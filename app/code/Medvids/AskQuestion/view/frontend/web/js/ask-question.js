@@ -10,7 +10,7 @@ define([
     $.widget('medvids.askQuestion', {
         options: {
             cookieName: 'question_sent',
-            cookieDuration: 120,
+            cookieDuration: 120
         },
 
         /**
