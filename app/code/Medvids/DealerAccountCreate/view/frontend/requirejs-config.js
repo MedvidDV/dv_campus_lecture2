@@ -1,7 +1,9 @@
-let config = {
+var config = {
     map: {
         '*': {
-            'dealer-popup': 'Medvids_DealerAccountCreate/js/register-dealer'
+            'dealer-popup': 'Medvids_DealerAccountCreate/js/register-dealer',
+            'validateRealtime': 'Medvids_DealerAccountCreate/js/validate-realtime'
+
         }
     }
 };

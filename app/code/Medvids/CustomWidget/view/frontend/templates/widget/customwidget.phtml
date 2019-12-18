@@ -1,13 +1,11 @@
 <?php
     /** @var \Medvids\CustomWidget\Block\Widget\WidgetBlock $block */
 ?>
-
-<a href="<?= $block->escapeHtmlAttr('/geekhub-cms') ?>" class="block-promo banner-promo">
-
+<a href="<?= $block->escapeUrl($block->getHref()) ?>" class="block-promo banner-promo">
     <?= /* @noEscape */ $block->getText() ?>
     <span class="banner-content">
-        <strong class="title"> <?= $block->escapeHtml(__($block->getData('banner_title')))?></strong>
-        <strong class="info">Get fit and look fab in new seasonal styles</strong>
-        <span class="action more button"> <?= $block->escapeHtml(__($block->getData('btn_title'))) ?></span>
+        <strong class="title"><?= $block->escapeHtml($block->getData('banner_title')) ?></strong>
+        <strong class="info"><?= $block->escapeHtml(__('Get fit and look fab in new seasonal styles')) ?></strong>
+        <span class="action more button"><?= $block->escapeHtml($block->getData('btn_title')) ?></span>
     </span>
 </a>

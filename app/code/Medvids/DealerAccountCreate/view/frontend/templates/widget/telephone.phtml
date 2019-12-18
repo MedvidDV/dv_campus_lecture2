@@ -21,6 +21,7 @@
                value="<?= $block->escapeHtmlAttr($block->getTelephone()) ?>"
                title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
                class="input-text <?= $_validationClass ?: '' ?>"
+               data-validate="{required:true, 'phoneUS':true}"
         >
     </div>
 </div>

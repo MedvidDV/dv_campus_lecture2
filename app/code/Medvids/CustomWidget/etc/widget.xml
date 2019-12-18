@@ -6,6 +6,16 @@
         <label translate="true">Banner Widget</label>
         <description translate="true">Created Banner on the Page</description>
         <parameters>
+            <parameter name="page_id" xsi:type="block" visible="true" required="true" sort_order="15">
+                <label translate="true">Page</label>
+                <block class="Magento\Cms\Block\Adminhtml\Page\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Page...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
             <parameter name="block_id" xsi:type="block" visible="true" required="true" sort_order="20">
                 <label translate="true">Block</label>
                 <block class="Magento\Cms\Block\Adminhtml\Block\Widget\Chooser">
