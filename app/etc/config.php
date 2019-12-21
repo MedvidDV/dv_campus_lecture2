@@ -247,6 +247,7 @@ return [
         'Medvids_AskQuestionAdmin' => 1,
         'Medvids_Catalog' => 1,
         'Medvids_Cms' => 1,
+        'Medvids_CustomChat' => 1,
         'Medvids_CustomProductEdit' => 1,
         'Medvids_CustomWidget' => 1,
         'Medvids_DealerAccountCreate' => 1,

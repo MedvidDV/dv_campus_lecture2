@@ -1,0 +1,61 @@
+<?php /** @var Magento\Framework\View\Element\Template $block */ ?>
+
+<div id="custom-chat-body-wrapper"
+     class="custom-chat-body-wrapper ui-widget-content"
+     style="display: none"
+     data-mage-init='{"customChatChatBody":{}}'>
+    <div class="element-field chat-header">
+        <div class="contact-info-wrapper">
+            <img src='<?= $block->escapeUrl($block->getViewFileUrl('Medvids_CustomChat/images/man.png'))?>'
+                 id="custom-chat-contact-info-img"
+                 alt="">
+            <div class="contact-info-block">
+                <div id="custom-chat-contact-info-name">John Doe</div>
+                <div id="custom-chat-contact-info-status" class="custom-chat-offline"><span><?= $block->escapeHtml(__('offline')) ?></span></div>
+            </div>
+        </div>
+        <div class="control-field">
+            <button type="button"
+                    id="custom-chat-close-btn"
+                    title="<?= $block->escapeHtml(__('Close')) ?>">
+                <span class="btn-title"><?= $block->escapeHtml(__('Close')) ?></span>
+            </button>
+        </div>
+    </div>
+    <div id="custom-chat-chat-history" class="chat-history element-field">
+        <ul class="history-list">
+            <li class="message-admin message"><span class="message-body">hello, how may i help you? <span class="message-time">18:15</span></span></li>
+            <li class="message-user message"><span class="message-body">hello<span class="message-time">18:15</span></span></li>
+            <li class="message-admin message"><span class="message-body">hello, how may i help you? dsjfhjsf sdkfljadf j asfljdslfj adlfjsdf sdjfl <span class="message-time">18:15</span></span></li>
+            <li class="message-user message"><span class="message-body">hello how are you?<span class="message-time">18:15</span></span></li>
+            <li class="message-admin message"><span class="message-body">hello <span class="message-time">18:15</span></span></li>
+            <li class="message-user message"><span class="message-body">hello<span class="message-time">18:15</span></span></li>
+            <li class="message-admin message"><span class="message-body">hello, how may i help you? <span class="message-time">18:15</span></span></li>
+            <li class="message-user message"><span class="message-body">hello<span class="message-time">18:15</span></span></li>
+        </ul>
+    </div>
+    <div id="custom-chat-send-message" class="element-field">
+        <form action="<?= $block->escapeHtmlAttr($block->getUrl('send_message/submit')) ?>"
+              onsubmit="return false;"
+              id="custom-chat-message-form">
+            <div class="message-field">
+                <label for="custom_chat_user_message" class="label"><span><?= $block->escapeHtml(__('Your Message')) ?></span></label>
+                <div class="control">
+                    <textarea name="custom_chat_user_message"
+                              id="custom_chat_user_message"
+                              placeholder="<?= $block->escapeHtmlAttr(__('Your message')) ?>"
+                              rows="3"></textarea>
+                </div>
+                <div class="action-toolbar">
+                    <button type="submit"
+                            id="custom-chat-message-btn"
+                            class="action"
+                            title="<?= $block->escapeHtmlAttr(__('Send')) ?>">
+                        <span class="btn-title"><?= $block->escapeHtml(__('Send')) ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="custom.chat.open.button.top"
+                   after="minicart"
+                   template="Medvids_CustomChat::open_button_top.phtml">
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="custom.chat.chat.body"
+                   after="-"
+                   template="Medvids_CustomChat::chat_body.phtml">
+            </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="custom.chat.open.button"
+                   after="-"
+                   template="Medvids_CustomChat::open_button.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>
