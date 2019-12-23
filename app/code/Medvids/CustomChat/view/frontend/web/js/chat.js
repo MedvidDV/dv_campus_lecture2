@@ -13,7 +13,7 @@ define([
             closeBtn: '#custom-chat-close-btn',
             messageForm: '#custom-chat-message-form',
             messageHistory: '#custom-chat-chat-history > ul',
-            greetingMsg: 'How may I help you?'
+            greetingMsg: $.mage.__('How may I help you?')
         },
 
         /**
