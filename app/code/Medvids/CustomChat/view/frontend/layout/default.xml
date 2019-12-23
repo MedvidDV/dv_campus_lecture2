@@ -20,6 +20,11 @@
                    after="-"
                    template="Medvids_CustomChat::open_button.phtml">
             </block>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="custom.chat.refresh.button"
+                   after="-"
+                   template="Medvids_CustomChat::refresh_button.phtml">
+            </block>
         </referenceContainer>
     </body>
 </page>

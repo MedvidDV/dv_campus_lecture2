@@ -1,7 +1,7 @@
 define([
     'jquery',
-    'autocloseAlert',
-    //'Magento_Ui/js/modal/alert',
+    //'autocloseAlert',
+    'Magento_Ui/js/modal/alert',
     'jquery/ui',
     'mage/translate'
 ], function ($, alert) {
@@ -12,13 +12,35 @@ define([
             chatMessageTextArea: '#custom_chat_user_message',
             closeBtn: '#custom-chat-close-btn',
             messageForm: '#custom-chat-message-form',
-            messageHistory: '#custom-chat-chat-history > ul'
+            messageHistory: '#custom-chat-chat-history > ul',
+            greetingMsg: 'How may I help you?'
         },
 
         /**
          * @private
          */
         _create: function () {
+            $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
+            $(document).on('medvids_customChat_establishBinding.medvids_customChat', $.proxy(this._reestablish, this));
+            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
+            $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
+            $(this.options.messageForm).submit(this.submitMessage.bind(this));
+        },
+
+        /**
+         * @private
+         */
+        _destroy: function () {
+            $(document).off('medvids_customChat_openChat.medvids_customChat');
+            $(this.options.closeBtn).off('click.medvids_customChat');
+            $(this.options.messageForm).off('submit');
+        },
+
+        /**
+         * for testing, reestablish destroyed handlers
+         * @private
+         */
+        _reestablish: function () {
             $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
             $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
             $(this.options.messageForm).submit(this.submitMessage.bind(this));
@@ -43,8 +65,8 @@ define([
         /**
          * build a message, added current time
          */
-        _generateMessage: function (message) {
-            var messageWrapper = $('<li class="message-user message"></li>'),
+        _generateMessage: function (message, user) {
+            var messageWrapper = $('<li class="message-' + user + ' message"></li>'),
                 messageBody = $('<span class="message-body"></span>').text(message),
                 currentTimeStamp = new Date(),
                 messageTime = $('<span class="message-time"></span>').text(
@@ -58,7 +80,7 @@ define([
         /**
          * auto scroll to the last message
          */
-        scrolToLastMessage: function () {
+        scrollToLastMessage: function () {
             $('.message:last-child', $(this.options.messageHistory)).get(0).scrollIntoView();
         },
 
@@ -67,6 +89,8 @@ define([
          */
         openChat: function () {
             $(this.element).fadeIn().addClass('active');
+            this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
+
         },
 
         /**
@@ -103,12 +127,12 @@ define([
                 success: function (response) {
                     alert({
                         modalClass: 'custom-chat-alert',
-                        title: response.status,
+                        title: response.title,
                         content: response.message,
                         buttons: []
                     });
-                    this._appendMessage(this._generateMessage(message));
-                    this.scrolToLastMessage();
+                    this._appendMessage(this._generateMessage(message, 'user'));
+                    this.scrollToLastMessage();
                     this._resetForm($(this.options.messageForm));
                 },
 
@@ -118,7 +142,7 @@ define([
                 fail: function (error) {
                     alert({
                         modalClass: 'custom-chat-alert',
-                        title: error.status,
+                        title: error.title,
                         content: error.message,
                         buttons: []
                     });
@@ -132,6 +156,7 @@ define([
         closeChat: function () {
             $(document).trigger('medvids_customChat_closeChat.medvids_customChat');
             $(this.element).removeClass('active').fadeOut();
+            $(this.options.messageHistory).html('');
         }
     });
 

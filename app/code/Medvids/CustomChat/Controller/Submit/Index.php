@@ -41,12 +41,15 @@ class Index extends \Magento\Framework\App\Action\Action
             }
             $data = [
                 'status' => self::STATUS_SUCCESS,
+                'title' => 'Message Sent',
                 'message' => __('Will get back to you as soon as possible')
             ];
         } catch (\Exception $e) {
             $data = [
                 'status' => self::STATUS_ERROR,
-                'message' => __('Something went wrong, Please contact us if the issue persists')
+                'title' => 'Something went wrong',
+                'message' => __('Message has not been sent, 
+                Please contact us if the issue persists')
             ];
         }
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);
