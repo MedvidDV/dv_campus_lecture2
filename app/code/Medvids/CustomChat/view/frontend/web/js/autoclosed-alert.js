@@ -43,6 +43,18 @@ define([
                     that.destroy();
                 });
             }, this.options.modalLifeTime);
+        },
+
+        /**
+         * Add content to the message
+         * @returns {*}
+         */
+        openModal: function () {
+            var element = this._super();
+
+            $('<div></div>').html(this.options.content).appendTo(element);
+
+            return this._super();
         }
     });
 

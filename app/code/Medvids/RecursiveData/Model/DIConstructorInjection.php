@@ -88,7 +88,6 @@ class DIConstructorInjection
                 } elseif ($parameter->isArray()) {
                     $reflectionProp = $reflection->getProperty($parameter->getName());
                     $reflectionProp->setAccessible(true);
-//
                     $parametersArray[] = [
                         'name' => $parameter->getName(),
                         'type' => $parameter->getType(),
