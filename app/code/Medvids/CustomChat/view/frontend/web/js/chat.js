@@ -1,13 +1,13 @@
 define([
     'jquery',
-    //'autocloseAlert',
-    'Magento_Ui/js/modal/alert',
+    'autocloseAlert',
+    //'Magento_Ui/js/modal/alert',
     'jquery/ui',
     'mage/translate'
 ], function ($, alert) {
     'use strict';
 
-    $.widget('medvidsCustomChat.chatBody', {
+    $.widget('MedvidsCustomChat.chatBody', {
         options: {
             chatMessageTextArea: '#custom_chat_user_message',
             closeBtn: '#custom-chat-close-btn',
@@ -20,10 +20,9 @@ define([
          * @private
          */
         _create: function () {
-            $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
-            $(document).on('medvids_customChat_establishBinding.medvids_customChat', $.proxy(this._reestablish, this));
-            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
             $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
+            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
+            $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
             $(this.options.messageForm).submit(this.submitMessage.bind(this));
         },
 
@@ -31,19 +30,10 @@ define([
          * @private
          */
         _destroy: function () {
-            $(document).off('medvids_customChat_openChat.medvids_customChat');
             $(this.options.closeBtn).off('click.medvids_customChat');
+            $(document).off('medvids_customChat_openChat.medvids_customChat');
+            $(document).off('medvids_customChat_destroyBinding.medvids_customChat');
             $(this.options.messageForm).off('submit');
-        },
-
-        /**
-         * for testing, reestablish destroyed handlers
-         * @private
-         */
-        _reestablish: function () {
-            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
-            $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
-            $(this.options.messageForm).submit(this.submitMessage.bind(this));
         },
 
         /**
@@ -160,5 +150,5 @@ define([
         }
     });
 
-    return $.medvidsCustomChat.chatBody;
+    return $.MedvidsCustomChat.chatBody;
 });

@@ -6,7 +6,8 @@ namespace Medvids\CustomChat\Controller\Submit;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 
-class Index extends \Magento\Framework\App\Action\Action
+class Index extends \Magento\Framework\App\Action\Action implements
+    \Magento\Framework\App\Action\HttpPostActionInterface
 {
     const STATUS_ERROR = 'Error';
     const STATUS_SUCCESS = 'Success';
@@ -48,8 +49,7 @@ class Index extends \Magento\Framework\App\Action\Action
             $data = [
                 'status' => self::STATUS_ERROR,
                 'title' => 'Something went wrong',
-                'message' => __('Message has not been sent, 
-                Please contact us if the issue persists')
+                'message' => __('Message has not been sent. Please contact us if the issue persists.')
             ];
         }
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);

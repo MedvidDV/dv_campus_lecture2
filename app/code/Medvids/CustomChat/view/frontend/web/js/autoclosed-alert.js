@@ -38,32 +38,11 @@ define([
 
             setTimeout(function () {
                 that.closeModal();
+                that.modal.one(that.options.transitionEvent, function () {
+                    that.modal.remove();
+                    that.destroy();
+                });
             }, this.options.modalLifeTime);
-        },
-
-        /**
-         * Add content to the message
-         * @returns {*}
-         */
-        openModal: function () {
-            var element = this._super();
-
-            $('<div></div>').html(this.options.content).appendTo(element);
-
-            return this._super();
-        },
-
-        /**
-         *
-         * @returns Alert.js CloseModal func
-         */
-        closeModal: function () {
-            this._super();
-            //this.element.bind('autoclosedalertclosed', _.bind(this._remove, this));
-            this._remove();
-            this._destroyOverlay();
-
-            return this._super();
         }
     });
 

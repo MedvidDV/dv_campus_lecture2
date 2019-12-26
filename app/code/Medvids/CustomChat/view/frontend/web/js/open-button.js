@@ -3,15 +3,14 @@ define([
 ], function ($) {
     'use strict';
 
-    $.widget('MedvidsCustomeChat.openButton', {
+    $.widget('MedvidsCustomChat.openButton', {
         /**
          * @private
          */
         _create: function () {
             $(this.element).on('click.medvids_customChat', $.proxy(this.openChat, this));
             $(document).on('medvids_customChat_closeChat.medvids_customChat', $.proxy(this.closeChat, this));
-            $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
-            $(document).on('medvids_customChat_establishBinding.medvids_customChat', $.proxy(this._reestablish, this));
+            $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this.destroy, this));
 
             if ($(this.element).hasClass('floated')) {
                 $(this.element).parent().show();
@@ -24,15 +23,7 @@ define([
         _destroy: function () {
             $(this.element).off('click.medvids_customChat');
             $(document).off('medvids_customChat_closeChat.medvids_customChat');
-        },
-
-        /**
-         * for testing, reestablish destroyed handlers
-         * @private
-         */
-        _reestablish: function () {
-            $(this.element).on('click.medvids_customChat', $.proxy(this.openChat, this));
-            $(document).on('medvids_customChat_closeChat.medvids_customChat', $.proxy(this.closeChat, this));
+            $(document).off('medvids_customChat_destroyBinding.medvids_customChat');
         },
 
         /**
@@ -56,5 +47,5 @@ define([
         }
     });
 
-    return $.MedvidsCustomeChat.openButton;
+    return $.MedvidsCustomChat.openButton;
 });

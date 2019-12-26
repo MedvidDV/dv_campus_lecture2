@@ -1,0 +1,23 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Medvids\RecursiveData\Model\DIConstructorInjection">
+        <arguments>
+            <!-- Pass simple string -->
+            <argument name="stringParam" xsi:type="string">This is DI injection parameter</argument>
+            <!-- Pass instance of Medvids\RecursiveData\Model\DirectoryIterator -->
+            <argument name="instanceParam" xsi:type="object">Medvids\RecursiveData\Model\DirectoryAndFileIterator</argument>
+            <!-- Pass true -->
+            <argument name="boolParam" xsi:type="boolean">true</argument>
+            <!-- Pass 225 -->
+            <argument name="intParam" xsi:type="number">225</argument>
+            <!-- Pass constant value -->
+            <argument name="constantParam" xsi:type="const">Magento\Framework\Mview\View::DEFAULT_BATCH_SIZE</argument>
+            <!-- Pass array -->
+            <argument name="arrayParam" xsi:type="array">
+                <!-- First element is value of constant -->
+                <item name="firstElem" xsi:type="const">Magento\Config\Model\Config\Structure::TYPE_KEY</item>
+                <!-- and float argument -->
+                <item name="floatParam" xsi:type="number">1.58</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,42 @@
+<?php /** @var \Medvids\RecursiveData\Block\Block $block */ ?>
+<h3>Directory Iterator</h3>
+<ul class="file-tree">
+    <?php foreach ($block->getFileTree() as $item) : ?>
+        <li style="padding-left:<?= $block->escapeCss($item['level']) * 20 ?>px;"
+            class="<?= $block->escapeHtmlAttr($item['isDir'] ? 'directory' : 'file') ?>">
+            <?= $block->escapeHtml("{$item['name']} (modified at {$item['createdAt']} )") ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+<h3>Constants Reflection</h3>
+
+<ul class="file-tree">
+    <?php foreach ($block->getConstantTree() as $constant => $value) : ?>
+        <li><?= $block->escapeHtml("$constant = $value") ?></li>
+    <?php endforeach; ?>
+</ul>
+
+<h3>Public Methods Reflection</h3>
+
+<ul class="file-tree">
+    <?php foreach ($block->getPublicMethodsTree() as $method) : ?>
+        <li><?= $block->escapeHtml($method->name) ?></li>
+    <?php endforeach; ?>
+</ul>
+
+<h3>DI Injection Parameters</h3>
+
+<ul class="file-tree">
+    <?php foreach ($block->getDIConstructorTree() as $param) : ?>
+        <?php if (is_array($param['value'])) : ?>
+            <li>
+                <?= $block->escapeHtml("{$param['name']} : type = {$param['type']}, value=") ?>
+                <?= print_r($param['value'], true) ?>
+            </li>
+        <?php endif; ?>
+            <li>
+                <?= $block->escapeHtml("{$param['name']} : type = {$param['type']}, value = {$param['value']}") ?>
+            </li>
+    <?php endforeach; ?>
+</ul>

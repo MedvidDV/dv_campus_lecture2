@@ -1,9 +1,11 @@
 define([
-    'jquery'
+    'jquery',
+    'customChatOpenBtn',
+    'customChatChatBody'
 ], function ($) {
     'use strict';
 
-    $.widget('MedvidsCustomeChat.refreshButton', {
+    $.widget('MedvidsCustomChat.refreshButton', {
 
         /**
          * @private
@@ -21,7 +23,9 @@ define([
          * @private
          */
         _destroyEvent: function () {
-            $(document).trigger('medvids_customChat_destroyBinding.medvids_customChat');
+            $('.custom-chat-open-btn').openButton('destroy');
+            $('#custom-chat-body-wrapper').chatBody('destroy');
+
             $(this.element).removeClass('destroy-binding').addClass('establish-binding');
         },
 
@@ -30,7 +34,9 @@ define([
          * @private
          */
         _establishEvent: function () {
-            $(document).trigger('medvids_customChat_establishBinding.medvids_customChat');
+            $('.custom-chat-open-btn').openButton();
+            $('#custom-chat-body-wrapper').chatBody();
+
             $(this.element).removeClass('establish-binding').addClass('destroy-binding');
         },
 
@@ -40,17 +46,11 @@ define([
         bindingSwitcher: function () {
             if ($(this.element).hasClass('destroy-binding')) {
                 this._destroyEvent();
-
-                return;
-            }
-
-            if ($(this.element).hasClass('establish-binding')) {
+            } else {
                 this._establishEvent();
-
-                return;
             }
         }
     });
 
-    return $.MedvidsCustomeChat.refreshButton;
+    return $.MedvidsCustomChat.refreshButton;
 });
