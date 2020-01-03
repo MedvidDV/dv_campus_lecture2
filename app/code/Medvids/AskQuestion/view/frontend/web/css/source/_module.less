@@ -1,0 +1,32 @@
+& when (@media-common = true) {
+    .question-list-wrapper {
+        ul {
+            list-style-type: none;
+        }
+        ul, li, p, h3 {
+            padding: 0;
+            margin: 0;
+        }
+        .question-list {
+            .body {
+                font-size: 1.1em;
+                margin: 15px 0;
+            }
+            .question-item {
+                border-bottom: 1px solid @color-gray89;
+                padding: 30px 0;
+
+                .question-reply-item {
+                    padding-top: 20px;
+                }
+            }
+        }
+        .question-reply-list {
+            padding-left: 50px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+}

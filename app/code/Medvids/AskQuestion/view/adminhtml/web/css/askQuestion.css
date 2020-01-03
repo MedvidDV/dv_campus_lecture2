@@ -1,0 +1,7 @@
+.question-pending {
+    color: red;
+}
+
+.question-answered {
+    color: green;
+}

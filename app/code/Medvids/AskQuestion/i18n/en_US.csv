@@ -8,3 +8,12 @@
 "Form submitted","Form submitted"
 "Something went wrong, Please contact us if the issue persists","Something went wrong, Please contact us if the issue persists"
 "My question is...","My question is..."
+"A total of %1 record(s) have been update.","A total of %1 record(s) have been update."
+"Delete question#%1","Delete question#%1"
+"Answer","Answer",
+"Delete","Delete",
+"Are you sure you want to delete a question#%1?","Are you sure you want to delete a question#%1?"
+"Question #%1 deleted","Question #%1 deleted"
+"Question #%1 not found","Question #%1 not found"
+"Question #%1 has not been deleted","Question #%1 has not been deleted"
+

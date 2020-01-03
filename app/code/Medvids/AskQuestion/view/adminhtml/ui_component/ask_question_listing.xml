@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <!--Declare data source, columns list, button...-->
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ask_question_listing.ask_question_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>ask_question_columns</spinner>
+        <deps>
+            <dep>ask_question_listing.ask_question_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="ask_question_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">question_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Magento_Backend::admin</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="ask_question_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>question_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters" />
+        <exportButton name="export_button" />
+        <massaction name="listing_massaction">
+            <action name="change_status">
+                <settings>
+                    <url path="askquestionadmin/index/massChangeStatus" />
+                    <type>change_status</type>
+                    <label translate="true">Change Status</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="ask_question_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="medvids/index/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">schedule_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">ask_question_listing.ask_question_listing.ask_question_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">ask_question_listing.ask_question_listing.ask_question_column_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>question_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="question_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="name" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="email" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Email</label>
+            </settings>
+        </column>
+        <column name="phone" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Phone</label>
+            </settings>
+        </column>
+        <column name="product_name" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product Name</label>
+            </settings>
+        </column>
+        <column name="product_sku" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product SKU</label>
+            </settings>
+        </column>
+        <column name="question" sortOrder="70">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Question</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="80">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="status" component="Medvids_AskQuestion/js/grid/columns/select" sortOrder="90">
+            <settings>
+                <options class="Medvids\AskQuestion\Model\Config\Source\Status"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <bodyTmpl>Medvids_AskQuestion/grid/cells/text</bodyTmpl>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="store_id" sortOrder="100">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Store</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Medvids\AskQuestion\Controller\Adminhtml\Index\Actions">
+            <settings>
+                <indexField>question_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

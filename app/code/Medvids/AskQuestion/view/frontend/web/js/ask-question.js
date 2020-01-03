@@ -50,6 +50,7 @@ define([
             var formData = new FormData($(this.element).get(0));
 
             formData.append('form_key', $.mage.cookies.get('form_key'));
+            formData.append('isAjax', 1);
 
             $.ajax({
                 url: $(this.element).attr('action'),

@@ -12,6 +12,9 @@
                     <argument translate="true" name="title" xsi:type="string">Ask Question</argument>
                     <argument name="sort_order" xsi:type="string">80</argument>
                 </arguments>
+                <block class="Medvids\AskQuestion\Block\Questions"
+                       name="product.info.question.list"
+                       template="Medvids_AskQuestion::product/view/question_list.phtml" />
             </block>
         </referenceBlock>
     </body>
