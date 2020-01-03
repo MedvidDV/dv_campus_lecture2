@@ -26,19 +26,26 @@ class MassChangeStatus extends \Magento\Backend\App\Action implements
      * @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory
      */
     protected $collectionFactory;
+    /**
+     * @var \Magento\Framework\DB\TransactionFactory
+     */
+    private $transactionFactory;
 
     /**
+     * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Ui\Component\MassAction\Filter $filter
      * @param \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory
      */
     public function __construct(
+        \Magento\Framework\DB\TransactionFactory $transactionFactory,
+        \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory,
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Ui\Component\MassAction\Filter $filter,
-        \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory
+        \Magento\Ui\Component\MassAction\Filter $filter
     ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->transactionFactory = $transactionFactory;
         parent::__construct($context);
     }
 
@@ -50,13 +57,19 @@ class MassChangeStatus extends \Magento\Backend\App\Action implements
      */
     public function execute(): Redirect
     {
+        /** @var \Magento\Framework\DB\Transaction $transaction */
+        $transaction = $this->transactionFactory->create();
+
         /** @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collection */
         $collection = $this->filter->getCollection($this->collectionFactory->create());
+
         /** @var \Medvids\AskQuestion\Model\AskQuestion $item */
         foreach ($collection as $item) {
             $item->setStatus(\Medvids\AskQuestion\Model\AskQuestion::STATUS_ANSWERED);
-            $item->save();
+            $transaction->addObject($item);
         }
+
+        $transaction->save();
 
         $this->messageManager->addSuccessMessage(
             __('A total of %1 record(s) have been update.', $collection->getSize())
