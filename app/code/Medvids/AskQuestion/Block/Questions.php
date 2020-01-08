@@ -33,8 +33,6 @@ class Questions extends \Magento\Framework\View\Element\Template
     public function getQuestionCollection(): Collection
     {
         $collection = $this->collectionFactory->create();
-        $collection->addStoreFilter()->getSelect();
-
-        return $collection;
+        return $collection->setOrder('created_at', 'DESC');
     }
 }

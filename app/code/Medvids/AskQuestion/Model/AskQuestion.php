@@ -29,6 +29,12 @@ class AskQuestion extends \Magento\Framework\Model\AbstractModel
 {
     public const STATUS_PENDING = 'pending';
     public const STATUS_ANSWERED = 'answered';
+
+    /**
+     * @var string
+     */
+    protected $_eventPrefix = 'medvids_askquestion';
+
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */

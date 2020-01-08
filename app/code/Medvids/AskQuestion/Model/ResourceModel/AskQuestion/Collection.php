@@ -14,15 +14,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     private $storeManager;
+
     /**
-     * @var \Magento\Catalog\Model\ProductRepository
+     * @var \Magento\Catalog\Helper\Data
      */
-    private $productRepository;
+    protected $helper;
 
     /**
      * Collection constructor.
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \Magento\Catalog\Model\ProductRepository $productRepository
+     * @param \Magento\Catalog\Helper\Data $helper
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -32,7 +33,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     public function __construct(
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\ProductRepository $productRepository,
+        \Magento\Catalog\Helper\Data $helper,
         \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory,
         \Psr\Log\LoggerInterface $logger,
         \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
@@ -42,7 +43,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->storeManager = $storeManager;
-        $this->productRepository = $productRepository;
+        $this->helper = $helper;
     }
 
     protected function _construct()
@@ -51,7 +52,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             \Medvids\AskQuestion\Model\AskQuestion::class,
             \Medvids\AskQuestion\Model\ResourceModel\AskQuestion::class
         );
-        $this->_map['fields']['question_id'] = 'main_table.question_id';
+        //$this->_map['fields']['question_id'] = 'main_table.question_id';
     }
 
     public function addStoreFilter(int $storeId = 0): self
@@ -60,6 +61,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             $storeId = (int) $this->storeManager->getStore()->getId();
         }
         $this->addFilter('store_id', $storeId);
+
+        return $this;
+    }
+
+    public function addSkuFilter(string $sku = ''): self
+    {
+        if (!$sku && $this->helper->getProduct()->getSku() !== null) {
+            $sku = $this->helper->getProduct()->getSku();
+        }
+        $this->addFilter('product_sku', $sku);
 
         return $this;
     }
