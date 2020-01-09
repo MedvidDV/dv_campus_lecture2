@@ -5,7 +5,7 @@ namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Answer extends \Magento\Framework\App\Action\Action
+class Answer extends \Magento\Backend\App\Action
 {
 
     /**

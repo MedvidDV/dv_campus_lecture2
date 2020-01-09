@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
 
-class ChangeStatus extends \Magento\Framework\App\Action\Action
+class ChangeStatus extends \Magento\Backend\App\Action
 {
 
     /**

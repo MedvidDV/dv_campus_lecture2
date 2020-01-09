@@ -5,7 +5,7 @@ namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Delete extends \Magento\Framework\App\Action\Action
+class Delete extends \Magento\Backend\App\Action
 {
     /**
      * @var \Medvids\AskQuestion\Model\AskQuestionFactory

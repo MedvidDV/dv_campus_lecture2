@@ -5,7 +5,7 @@ namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
 
 use Magento\Framework\Controller\ResultFactory;
 
-class Index extends \Magento\Framework\App\Action\Action
+class Index extends \Magento\Backend\App\Action
 {
     /**
      * @inheritDoc
