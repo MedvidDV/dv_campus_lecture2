@@ -78,7 +78,7 @@ RUN if [ "$DEVELOPER_MODE" = 1 ] ; then \
         && apt-get install nodejs -y \
         && npm install -g grunt-cli ; \
     fi ;
-
+`
 RUN a2enmod rewrite proxy proxy_http ssl headers expires
 #RUN a2enmod rewrite
 
@@ -91,3 +91,9 @@ RUN if [ "$DEVELOPER_MODE" = 1 ] ; then \
     else \
         composer global require hirak/prestissimo ; \
     fi ;
+
+RUN echo "
+* * * * * /usr/local/bin/php /var/www/html/bin/magento cron:run 2>&1 | grep -v \"Ran jobs by schedule\" >> /var/www/html/var/log/magento.cron.log
+* * * * * /usr/local/bin/php /var/www/html/update/cron.php >> /var/www/html/var/log/update.cron.log
+* * * * * /usr/local/bin/php /var/www/html/bin/magento setup:cron:run >> /var/www/html/var/log/setup.cron.log
+" >> /var/spool/cron/crontabs/docker

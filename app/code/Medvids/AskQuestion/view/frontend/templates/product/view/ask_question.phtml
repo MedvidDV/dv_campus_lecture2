@@ -1,5 +1,4 @@
 <?php /** @var Magento\Catalog\Block\Product\View $block */ ?>
-
 <div class="block">
     <div class="block-content">
         <?= $block->getChildHtml('product.info.question.list') ?>
@@ -71,16 +70,20 @@
                     <div class="primary actions-primary">
                         <input type="hidden"
                                name="product_sku"
-                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getSku())) ?>" >
+                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getSku())) ?>"
+                        />
                         <input type="hidden"
                                name="product_name"
-                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getName())) ?>">
+                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getName())) ?>"
+                        />
                         <input type="hidden"
                                name="store_id_question"
-                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getStoreId())) ?>">
+                               value="<?= $block->escapeHtmlAttr(__($block->getProduct()->getStoreId())) ?>"
+                        />
                         <input type="hidden"
                                name="hideit"
-                               value="">
+                               value=""
+                        />
                         <button type="submit" class="action submit primary">
                             <span><?= $block->escapeHtml(__('Ask Question')) ?></span>
                         </button>

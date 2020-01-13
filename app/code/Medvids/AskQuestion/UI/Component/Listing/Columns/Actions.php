@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
+namespace Medvids\AskQuestion\UI\Component\Listing\Columns;
 
 class Actions extends \Magento\Ui\Component\Listing\Columns\Column
 {
@@ -65,7 +65,7 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
                             ),
                             'label' => __('Delete'),
                             'confirm' => [
-                                'title' => __('Delete question#%1', $title),
+                                'title' => __('Delete question #%1', $title),
                                 'message' => __('Are you sure you want to delete a question#%1?', $title)
                             ]
                         ]

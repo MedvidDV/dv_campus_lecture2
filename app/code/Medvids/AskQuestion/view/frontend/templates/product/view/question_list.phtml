@@ -6,7 +6,8 @@
     <h2>People asked:</h2>
     <ul id="question-list" class="question-list">
         <?php /** @var \Medvids\AskQuestion\Model\AskQuestion $question */
-        foreach ($questions as $question) :?>
+            foreach ($questions as $question) :
+        ?>
             <li class="question-item">
                 <h3 class="author"><?= $block->escapeHtml($question->getName()) ?></h3>
                 <p class="body"><?= $block->escapeHtml($question->getQuestion()) ?></p>

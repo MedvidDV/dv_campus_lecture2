@@ -9,7 +9,6 @@ use Magento\Framework\Controller\ResultFactory;
 class MassChangeStatus extends \Magento\Backend\App\Action implements
     \Magento\Framework\App\Action\HttpPostActionInterface
 {
-
     /**
      * Authorization level of a basic admin session
      *
@@ -18,16 +17,17 @@ class MassChangeStatus extends \Magento\Backend\App\Action implements
     const ADMIN_RESOURCE = 'Medvids_AskQuestion::save';
 
     /**
-     * @var \Magento\Ui\Component\MassAction\Filter
+     * @var \Magento\Ui\Component\MassAction\Filter $filter
      */
-    protected $filter;
+    private $filter;
 
     /**
-     * @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory
+     * @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $collectionFactory
      */
-    protected $collectionFactory;
+    private $collectionFactory;
+
     /**
-     * @var \Magento\Framework\DB\TransactionFactory
+     * @var \Magento\Framework\DB\TransactionFactory $transactionFactory
      */
     private $transactionFactory;
 

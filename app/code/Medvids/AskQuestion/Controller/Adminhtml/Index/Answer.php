@@ -16,6 +16,7 @@ class Answer extends \Magento\Backend\App\Action
         $request = $this->getRequest();
         $id = $request->getParam('id');
 
+        /** @var \Magento\Framework\View\Result\Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->getConfig()->getTitle()->prepend(__('Answer Question'));
         $resultBlock = $resultPage->getLayout()->getBlock('ask.question.response');

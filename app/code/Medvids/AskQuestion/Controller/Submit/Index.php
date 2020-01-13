@@ -5,7 +5,7 @@ namespace Medvids\AskQuestion\Controller\Submit;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Store\Model\Store;
+use Medvids\AskQuestion\Model\AskQuestion;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
@@ -50,6 +50,7 @@ class Index extends \Magento\Framework\App\Action\Action
                 throw new LocalizedException(__('Request is not valid'));
             }
 
+            /** @var AskQuestion $askQuestion */
             $askQuestion = $this->askQuestionFactory->create();
             $askQuestion->setName($request->getParam('name_question'))
                 ->setEmail($request->getParam('email_question'))
@@ -66,7 +67,6 @@ class Index extends \Magento\Framework\App\Action\Action
             ];
 
         } catch (\Exception $e) {
-
             $data = [
                 'status' => self::STATUS_ERROR,
                 'message' => __('Something went wrong, Please contact us if the issue persists')

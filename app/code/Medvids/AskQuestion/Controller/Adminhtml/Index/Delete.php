@@ -4,16 +4,17 @@ declare(strict_types=1);
 namespace Medvids\AskQuestion\Controller\Adminhtml\Index;
 
 use Magento\Framework\Controller\ResultFactory;
+use Medvids\AskQuestion\Model\AskQuestion;
 
 class Delete extends \Magento\Backend\App\Action
 {
     /**
-     * @var \Medvids\AskQuestion\Model\AskQuestionFactory
+     * @var \Medvids\AskQuestion\Model\AskQuestionFactory $askQuestionFactory
      */
     private $askQuestionFactory;
 
-    /**hello
-     * @var \Psr\Log\LoggerInterface
+    /**
+     * @var \Psr\Log\LoggerInterface $logger
      */
     private $logger;
 
@@ -22,13 +23,13 @@ class Delete extends \Magento\Backend\App\Action
      * @param \Medvids\AskQuestion\Model\AskQuestionFactory $askQuestionFactory
      * @param \Magento\Framework\Message\ManagerInterface $messageManager
      * @param \Psr\Log\LoggerInterface $logger
-     * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Backend\App\Action\Context $context
      */
     public function __construct(
         \Medvids\AskQuestion\Model\AskQuestionFactory $askQuestionFactory,
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \Psr\Log\LoggerInterface $logger,
-        \Magento\Framework\App\Action\Context $context
+        \Magento\Backend\App\Action\Context $context
     ) {
         parent::__construct($context);
         $this->askQuestionFactory = $askQuestionFactory;
@@ -44,6 +45,7 @@ class Delete extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $id = $this->getRequest()->getParam('id');
         try {
+            /** @var AskQuestion $question */
             $question = $this->askQuestionFactory->create();
             $question->load($id);
             if ($question->getId()) {

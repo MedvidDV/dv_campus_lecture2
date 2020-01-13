@@ -114,7 +114,7 @@ class UpgradeData implements UpgradeDataInterface
             );
 
             // Update existing products to have 'allow_question' switched to true
-            /* @var $collection \Magento\Catalog\Model\ResourceModel\Product\Collection */
+            /* @var \Magento\Catalog\Model\ResourceModel\Product\Collection $collection */
             $collection = $this->collectionFactory->create();
             $collection->getItems();
 

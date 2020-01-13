@@ -60,6 +60,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         if (!$storeId) {
             $storeId = (int) $this->storeManager->getStore()->getId();
         }
+
         $this->addFilter('store_id', $storeId);
 
         return $this;
@@ -67,9 +68,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 
     public function addSkuFilter(string $sku = ''): self
     {
-        if (!$sku && $this->helper->getProduct()->getSku() !== null) {
+        if (!$sku && $this->helper->getProduct() !== null) {
             $sku = $this->helper->getProduct()->getSku();
         }
+
         $this->addFilter('product_sku', $sku);
 
         return $this;

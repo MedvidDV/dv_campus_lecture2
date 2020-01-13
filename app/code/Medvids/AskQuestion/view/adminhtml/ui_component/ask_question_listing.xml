@@ -19,7 +19,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>Magento_Backend::admin</aclResource>
+        <aclResource>Medvids_AskQuestion::ask_question_admin</aclResource>
         <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="ask_question_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
@@ -141,7 +141,7 @@
                 <label translate="true">Store</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Medvids\AskQuestion\Controller\Adminhtml\Index\Actions">
+        <actionsColumn name="actions" class="Medvids\AskQuestion\UI\Component\Listing\Columns\Actions">
             <settings>
                 <indexField>question_id</indexField>
             </settings>

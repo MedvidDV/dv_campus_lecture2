@@ -12,6 +12,7 @@ class Collection
      */
     public function beforeLoad(QuestionCollection $subject): void
     {
-        $subject->addStoreFilter()->addSkuFilter()->getSelect();
+        $subject->addStoreFilter()
+            ->addSkuFilter();
     }
 }
