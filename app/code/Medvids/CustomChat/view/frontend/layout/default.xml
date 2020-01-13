@@ -10,7 +10,7 @@
             </block>
         </referenceContainer>
         <referenceContainer name="before.body.end">
-            <block class="Magento\Framework\View\Element\Template"
+            <block class="Medvids\CustomChat\Block\Chat"
                    name="custom.chat.chat.body"
                    after="-"
                    template="Medvids_CustomChat::chat_body.phtml">

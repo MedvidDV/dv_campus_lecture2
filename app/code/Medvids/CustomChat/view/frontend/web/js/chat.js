@@ -22,6 +22,7 @@ define([
         _create: function () {
             $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
             $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
+            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.scrollToLastMessage, this));
             $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
             $(this.options.messageForm).submit(this.submitMessage.bind(this));
         },
@@ -33,7 +34,6 @@ define([
             $(this.options.closeBtn).off('click.medvids_customChat');
             $(document).off('medvids_customChat_openChat.medvids_customChat');
             $(document).off('medvids_customChat_destroyBinding.medvids_customChat');
-            $(this.options.messageForm).off('submit');
         },
 
         /**
@@ -79,8 +79,10 @@ define([
          */
         openChat: function () {
             $(this.element).fadeIn().addClass('active');
-            this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
 
+            if (!$('li', this.options.messageHistory).length) {
+                this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
+            }
         },
 
         /**
@@ -146,7 +148,7 @@ define([
         closeChat: function () {
             $(document).trigger('medvids_customChat_closeChat.medvids_customChat');
             $(this.element).removeClass('active').fadeOut();
-            $(this.options.messageHistory).html('');
+            //$(this.options.messageHistory).html('');
         }
     });
 

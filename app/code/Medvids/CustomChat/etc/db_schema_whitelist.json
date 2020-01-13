@@ -1,0 +1,20 @@
+{
+  "medvids_custom_chat": {
+    "column": {
+      "message_id": true,
+      "author_type": true,
+      "author_id": true,
+      "author_name": true,
+      "message": true,
+      "website_id": true,
+      "chat_hash": true,
+      "created_at": true
+    },
+    "constraint": {
+      "PRIMARY": true,
+      "MEDVIDS_CUSTOM_CHAT_CREATED_AT": true,
+      "MEDVIDS_CUSTOM_CHAT_WEBSITE_ID": true,
+      "MEDVIDS_CC_WS_ID_STORE_WS_WS_ID": true
+    }
+  }
+}
