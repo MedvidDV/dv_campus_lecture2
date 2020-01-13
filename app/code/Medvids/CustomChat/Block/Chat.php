@@ -60,7 +60,10 @@ class Chat extends \Magento\Framework\View\Element\Template
     {
         /** @var \Medvids\CustomChat\Model\ResourceModel\CustomChat\Collection $messageCollection */
         $messageCollection = $this->collectionFactory->create();
-        $messageCollection->addFieldToFilter('website_id', ['eq' => $this->getCurrentWebsiteId()]);
+        $messageCollection->addFieldToFilter(
+            'website_id',
+            ['eq' => $this->getCurrentWebsiteId()]
+        );
 
         if ($messageCollection->getSize() > self::ROW_PER_PAGE) {
             $messageCollection->getSelect()
@@ -84,6 +87,8 @@ class Chat extends \Magento\Framework\View\Element\Template
 
     public function getFormattedDate(string $messageDate): string
     {
-        return $this->timezone->date($messageDate)->format('H:i');
+        return $this->timezone
+            ->date($messageDate)
+            ->format('H:i');
     }
 }

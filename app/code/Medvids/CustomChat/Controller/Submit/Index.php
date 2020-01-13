@@ -9,8 +9,8 @@ use Magento\Framework\Exception\LocalizedException;
 class Index extends \Magento\Framework\App\Action\Action implements
     \Magento\Framework\App\Action\HttpPostActionInterface
 {
-    const STATUS_ERROR = 'Error';
-    const STATUS_SUCCESS = 'Success';
+    public const STATUS_ERROR = 'Error';
+    public const STATUS_SUCCESS = 'Success';
 
     /**
      * @var \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator;
