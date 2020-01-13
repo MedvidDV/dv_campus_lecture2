@@ -3,7 +3,7 @@
 ?>
 <?php if ($questions->count()): ?>
 <div class="question-list-wrapper">
-    <h2>People asked:</h2>
+    <h2><?= $block->escapeHtml(__('People asked: ')) ?></h2>
     <ul id="question-list" class="question-list">
         <?php /** @var \Medvids\AskQuestion\Model\AskQuestion $question */
             foreach ($questions as $question) :
@@ -11,7 +11,12 @@
             <li class="question-item">
                 <h3 class="author"><?= $block->escapeHtml($question->getName()) ?></h3>
                 <p class="body"><?= $block->escapeHtml($question->getQuestion()) ?></p>
-                <p class="timestamp">asked: <span class="date"><?= $block->escapeHtml($question->getCreatedAt()) ?></span></p>
+                <p class="timestamp">
+                    <?= $block->escapeHtml(__('asked: ')) ?>
+                    <span class="date">
+                        <?= $block->escapeHtml($question->getCreatedAt()) ?>
+                    </span>
+                </p>
                 <ul class="question-reply-list">
 <!--                    <li class="question-reply-item">-->
 <!--                        <h3 class="author">Alice Cooper</h3>-->
@@ -27,6 +32,6 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <h2>Didn't find answer on your question? Ask Yourself:</h2>
+    <h2><?= $block->escapeHtml(__('Didn\'t find answer on your question? Ask Yourself:')) ?></h2>
 </div>
 <?php endif; ?>

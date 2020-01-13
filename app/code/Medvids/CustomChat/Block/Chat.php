@@ -85,6 +85,10 @@ class Chat extends \Magento\Framework\View\Element\Template
         }
     }
 
+    /**
+     * @param string $messageDate
+     * @return string
+     */
     public function getFormattedDate(string $messageDate): string
     {
         return $this->timezone
