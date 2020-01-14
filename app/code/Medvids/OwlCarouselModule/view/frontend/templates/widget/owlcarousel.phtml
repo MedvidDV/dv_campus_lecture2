@@ -1,0 +1,12 @@
+<?php
+    /* @var Medvids\OwlCarouselModule\Block\Widget\Block $block */
+?>
+<div class="widget block block-static-block">
+    <div class="owl-carousel owl-theme"
+         id="owlCarousel-<?= $block->escapeHtmlAttr($block->getData('carousel_id')) ?>"
+        data-mage-init='{"owlCarouselSlider": {}}'>
+        <?= /* @noEscape */ $block->getText() ?>
+        <?= $block->getChildHtml()?>
+    </div>
+</div>
+
