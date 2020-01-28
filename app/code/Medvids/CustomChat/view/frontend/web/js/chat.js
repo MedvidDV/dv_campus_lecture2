@@ -22,7 +22,7 @@ define([
         _create: function () {
             $(this.options.closeBtn).on('click.medvids_customChat', $.proxy(this.closeChat, this));
             $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.openChat, this));
-            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.scrollToLastMessage, this));
+            $(document).on('medvids_customChat_openChat.medvids_customChat', $.proxy(this.getCollection, this));
             $(document).on('medvids_customChat_destroyBinding.medvids_customChat', $.proxy(this._destroy, this));
             $(this.options.messageForm).submit(this.submitMessage.bind(this));
         },
@@ -55,14 +55,22 @@ define([
         /**
          * build a message, added current time
          */
-        _generateMessage: function (message, user) {
+        _generateMessage: function (message, user, time) {
             var messageWrapper = $('<li class="message-' + user + ' message"></li>'),
                 messageBody = $('<span class="message-body"></span>').text(message),
-                currentTimeStamp = new Date(),
+                messageTime = '';
+
+            time = time || '';
+
+            if (time) {
+                messageTime = $('<span class="message-time"></span>').text(time);
+            } else {
+                time = new Date();
                 messageTime = $('<span class="message-time"></span>').text(
-                    currentTimeStamp.getHours() + ':' + (currentTimeStamp.getMinutes() < 10 ? '0' : '') +
-                    currentTimeStamp.getMinutes()
+                    time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') +
+                    time.getMinutes()
                 );
+            }
 
             return messageWrapper.append(messageBody.append(messageTime));
         },
@@ -79,10 +87,6 @@ define([
          */
         openChat: function () {
             $(this.element).fadeIn().addClass('active');
-
-            if (!$('li', this.options.messageHistory).length) {
-                this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
-            }
         },
 
         /**
@@ -143,12 +147,44 @@ define([
         },
 
         /**
+         *
+         */
+        getCollection: function () {
+            var self = this;
+
+            $.ajax({
+                url: 'send-message/collection/messages',
+                dataType: 'json',
+                type: 'get',
+                context: this
+            }).done(function (response) {
+                if (response.messages.length) {
+                    $.each(response.messages, function (index, item) {
+                        self._appendMessage(
+                            self._generateMessage(
+                                item.message,
+                                item.authorType,
+                                item.createdAt
+                            )
+                        );
+                    });
+                } else {
+                    self._appendMessage(self._generateMessage(self.options.greetingMsg, 'admin'));
+                }
+            }).fail(function () {
+                this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
+            }).always(function () {
+                this.scrollToLastMessage();
+            });
+        },
+
+        /**
          * generate custom event to show chat button; hide chat body
          */
         closeChat: function () {
             $(document).trigger('medvids_customChat_closeChat.medvids_customChat');
             $(this.element).removeClass('active').fadeOut();
-            //$(this.options.messageHistory).html('');
+            // $(this.options.messageHistory).html('');
         }
     });
 

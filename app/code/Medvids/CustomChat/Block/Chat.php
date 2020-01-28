@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Medvids\CustomChat\Block;
 
-use \Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\LocalizedException;
 use Medvids\CustomChat\Model\ResourceModel\CustomChat\Collection;
 
 class Chat extends \Magento\Framework\View\Element\Template
@@ -55,6 +55,7 @@ class Chat extends \Magento\Framework\View\Element\Template
 
     /**
      * @return \Medvids\CustomChat\Model\ResourceModel\CustomChat\Collection
+     * @throws LocalizedException
      */
     public function getMessageCollection(): Collection
     {
@@ -75,6 +76,7 @@ class Chat extends \Magento\Framework\View\Element\Template
 
     /**
      * @return mixed
+     * @throws LocalizedException
      */
     public function getCurrentWebsiteId()
     {
@@ -82,17 +84,7 @@ class Chat extends \Magento\Framework\View\Element\Template
             return $this->storeManager->getWebsite()->getId();
         } catch (LocalizedException $e) {
             $this->logger->error($e->getMessage());
+            throw $e;
         }
-    }
-
-    /**
-     * @param string $messageDate
-     * @return string
-     */
-    public function getFormattedDate(string $messageDate): string
-    {
-        return $this->timezone
-            ->date($messageDate)
-            ->format('H:i');
     }
 }

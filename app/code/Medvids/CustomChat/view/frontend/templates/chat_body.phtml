@@ -1,6 +1,6 @@
 <?php
     /** @var \Medvids\CustomChat\Block\Chat $block */
-    $messageCollection = $block->getMessageCollection();
+    $messageData = $block->getMessageCollection();
 ?>
 
 <div id="custom-chat-body-wrapper"
@@ -27,19 +27,6 @@
     </div>
     <div id="custom-chat-chat-history" class="chat-history element-field">
         <ul class="history-list">
-            <?php /** @var \Medvids\CustomChat\Model\CustomChat  $message */
-                foreach ($messageCollection as $message):
-            ?>
-                <li class="message-<?= $block->escapeHtmlAttr(__($message->getAuthorType())) ?> message">
-                    <span class="message-body"><?= $block->escapeHtml(__($message->getMessage())) ?>
-                        <span class="message-time">
-                            <?= $block->escapeHtml(__($block->getFormattedDate($message->getCreatedAt()))) ?>
-                        </span>
-                    </span>
-                </li>
-            <?php endforeach; ?>
-
-<!--            <li class="message-admin message"><span class="message-body">hello, how may i help you? <span class="message-time">18:15</span></span></li>-->
         </ul>
     </div>
     <div id="custom-chat-send-message" class="element-field">
