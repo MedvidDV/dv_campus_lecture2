@@ -53,6 +53,7 @@ class ChangeStatusAnswer
      */
     public function execute(): void
     {
+        /** @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\Collection $collection */
         $collection = $this->collectionFactory->create();
         $lifeTimeCondition = '-' . self::LIFETIME . ' days';
         $dayCondition = $this->timezone->date()

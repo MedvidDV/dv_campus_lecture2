@@ -6,10 +6,18 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::content">
                     <resource id="Magento_Backend::content_elements">
-                        <resource id="Medvids_AskQuestion::ask_question_admin" title="Ask Question" translate="title" sortOrder="50" />
-                            <resource id="Medvids_AskQuestion::actions" title="Actions" translate="title" sortOrder="10">
-                                <resource id="Medvids_AskQuestion::save" title="Save" translate="title" sortOrder="10" />
-                            </resource>
+                        <resource id="Medvids_AskQuestion::ask_question_admin" title="Ask Question" translate="title" sortOrder="50"
+                        />
+                        <resource id="Medvids_AskQuestion::actions" title="Actions" translate="title" sortOrder="10">
+                            <resource id="Medvids_AskQuestion::save" title="Save" translate="title" sortOrder="10" />
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Medvids_AskQuestion::ask_question_settings" title="Ask Question Settings"/>
+                        </resource>
                     </resource>
                 </resource>
             </resource>

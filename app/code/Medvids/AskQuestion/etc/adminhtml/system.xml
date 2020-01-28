@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="medvids" translate="label" sortOrder="11">
+            <label>Medvids</label>
+        </tab>
+        <section id="ask_question" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Medvids_AskQuestion::ask_question_settings</resource>
+            <label>Ask Question</label>
+            <class>separator-top</class>
+            <tab>medvids</tab>
+            <group id="general" translate="label"  sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+            </group>
+            <group id="cron" translate="label"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Cron Configuration</label>
+                <field id="autoConfirming" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Auto Confirming</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="frequency" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Frequency of Running Checking</label>
+                    <backend_model>Medvids\AskQuestion\Model\Config\Backend\CronConfig</backend_model>
+                    <source_model>Medvids\AskQuestion\Model\Config\Source\CronFrequency</source_model>
+                </field>
+                <field id="lifetime" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Max Pending Status Lifetime, days</label>
+                </field>
+                <depends>
+                    <field id="ask_question/general/enable">1</field>
+                </depends>
+            </group>
+            <group id="test" translate="label" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" >
+                <label>Test Group</label>
+                <field id="testMultiSelect" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Test Multiselect</label>
+                    <source_model>Medvids\AskQuestion\Model\Config\Source\TestMultiselect</source_model>
+                </field>
+                <field id="testSelect" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Test Select</label>
+                    <source_model>Medvids\AskQuestion\Model\Config\Source\TestSelect</source_model>
+                </field>
+                <field id="testText" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Test Text</label>
+                </field>
+                <depends>
+                    <field id="ask_question/general/enable">1</field>
+                </depends>
+            </group>
+        </section>
+    </system>
+</config>

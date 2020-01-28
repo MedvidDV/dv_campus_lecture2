@@ -32,7 +32,9 @@ class Questions extends \Magento\Framework\View\Element\Template
      */
     public function getQuestionCollection(): Collection
     {
+        /** @var \Medvids\AskQuestion\Model\ResourceModel\AskQuestion\Collection $collection */
         $collection = $this->collectionFactory->create();
+        $collection->addFieldToSelect(['name', 'question', 'created_at']);
         return $collection->setOrder('created_at', 'DESC');
     }
 }
