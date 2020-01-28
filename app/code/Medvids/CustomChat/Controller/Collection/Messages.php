@@ -83,7 +83,14 @@ class Messages extends \Magento\Framework\App\Action\Action implements
             $data = ['messages' => $messages];
         } catch (LocalizedException $e) {
             $this->logger->error($e->getMessage());
-            throw $e;
+            $data = [
+                'messages' => [
+                    [
+                        'authorType' => 'admin',
+                        'message' => __('How may I help you?')
+                    ]
+                ]
+            ];
         }
 
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);

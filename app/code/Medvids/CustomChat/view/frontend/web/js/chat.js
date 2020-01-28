@@ -172,6 +172,10 @@ define([
                     self._appendMessage(self._generateMessage(self.options.greetingMsg, 'admin'));
                 }
             }).fail(function () {
+                this._appendMessage(this._generateMessage(
+                    $.mage.__('History couldn\'t be loaded right now'),
+                    'system'
+                ));
                 this._appendMessage(this._generateMessage(this.options.greetingMsg, 'admin'));
             }).always(function () {
                 this.scrollToLastMessage();
