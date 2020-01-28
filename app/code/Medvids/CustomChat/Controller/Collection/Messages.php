@@ -58,6 +58,7 @@ class Messages extends \Magento\Framework\App\Action\Action implements
      */
     public function execute()
     {
+        $messages = [];
         try {
             /** @var \Medvids\CustomChat\Model\ResourceModel\CustomChat\Collection $messageCollection */
             $messageCollection = $this->collectionFactory->create();
@@ -70,7 +71,7 @@ class Messages extends \Magento\Framework\App\Action\Action implements
                 $messageCollection->getSelect()
                     ->limit(self::ROW_PER_PAGE, $messageCollection->getSize()-self::ROW_PER_PAGE);
             }
-            $messages = [];
+
             /** @var \Medvids\CustomChat\Model\CustomChat $message */
             foreach ($messageCollection as $key => $message) {
                 $messages[] = [

@@ -58,7 +58,7 @@ define([
         _generateMessage: function (message, user, time) {
             var messageWrapper = $('<li class="message-' + user + ' message"></li>'),
                 messageBody = $('<span class="message-body"></span>').text(message),
-                messageTime = '';
+                messageTime;
 
             time = time || '';
 
@@ -184,7 +184,7 @@ define([
         closeChat: function () {
             $(document).trigger('medvids_customChat_closeChat.medvids_customChat');
             $(this.element).removeClass('active').fadeOut();
-            // $(this.options.messageHistory).html('');
+            $(this.options.messageHistory).html('');
         }
     });
 
