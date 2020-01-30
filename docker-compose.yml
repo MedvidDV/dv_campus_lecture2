@@ -35,6 +35,8 @@ services:
       - "medvid-first-project.local www.medvid-first-project.local medvid-sergii.local www.medvid-sergii.local medvid-new.local www.medvid-new.local:127.0.0.1 "
 #    links:
 #      - memcached
+    links:
+      - redis
     external_links:
       - mysql57:mysql
 #    networks:
@@ -45,6 +47,12 @@ services:
       - /misc/share/ssl:/certs
       - ./docker/virtual-host.conf:/etc/apache2/sites-enabled/virtual-host.conf
 
+  redis:
+      image: redis:latest
+      network_mode: bridge
+      labels:
+        - traefik.enable=false
+      restart: always
 #  memcached:
 #    image: 'memcached:1.5'
 #    network_mode: bridge
