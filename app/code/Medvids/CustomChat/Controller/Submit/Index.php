@@ -18,31 +18,39 @@ class Index extends \Magento\Framework\App\Action\Action implements
     private $formKeyValidator;
 
     /**
-     * @var \Magento\Customer\Api\CustomerRepositoryInterfaceFactory
-     */
-    private $customerRepositoryFactory;
-
-    /**
-     * @var \Medvids\CustomChat\Model\CustomChatFactory
+     * @var \Medvids\CustomChat\Model\CustomChatFactory $customChatMessageFactory
      */
     private $customChatMessageFactory;
 
     /**
-     * @param \Magento\Customer\Api\CustomerRepositoryInterfaceFactory $customerRepositoryFactory
+     * @var \Magento\Customer\Model\Session $customerSession
+     */
+    private $customerSession;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface $storeManager
+     */
+    private $storeManager;
+
+    /**
      * @param \Medvids\CustomChat\Model\CustomChatFactory $customChatMessageFactory
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\Action\Context $context
      */
     public function __construct(
-        \Magento\Customer\Api\CustomerRepositoryInterfaceFactory $customerRepositoryFactory,
         \Medvids\CustomChat\Model\CustomChatFactory $customChatMessageFactory,
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Action\Context $context
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
-        $this->customerRepositoryFactory = $customerRepositoryFactory;
         $this->customChatMessageFactory = $customChatMessageFactory;
+        $this->customerSession = $customerSession;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -56,22 +64,30 @@ class Index extends \Magento\Framework\App\Action\Action implements
                 throw new LocalizedException(__('Something went wrong, Please contact us if the issue persists'));
             }
 
-            $customerId = $request->getParam('author_id');
+            if ($chat_hash = $this->customerSession->getData('chat_hash')) {
+                if ($this->customerSession->isLoggedIn()) {
+                    $customer = $this->customerSession->getCustomerData();
 
-            /** @var \Magento\Customer\Api\CustomerRepositoryInterface $customerEntity */
-            $customerEntity = $this->customerRepositoryFactory->create();
-            $customer = $customerEntity->getById($customerId);
-
-            /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
-            $customChatMessage = $this->customChatMessageFactory->create();
-            $customChatMessage->setAuthorType($request->getParam('author_type'))
-                ->setAuthorName($request->getParam('author_name'))
-                ->setAuthorId($customerId)
-                ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
-                ->setMessage($request->getParam('author_message'))
-                ->setWebsiteId($request->getParam('website_id'))
-                ->setChatHash('123456789');
-            $customChatMessage->save();
+                    /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
+                    $customChatMessage = $this->customChatMessageFactory->create();
+                    $customChatMessage->setAuthorType($request->getParam('author_type'))
+                        ->setAuthorId($customer->getId())
+                        ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
+                        ->setMessage($request->getParam('author_message'))
+                        ->setWebsiteId($this->storeManager->getWebsite()->getId())
+                        ->setChatHash($chat_hash['user_hash']);
+                    $customChatMessage->save();
+                } else {
+                    /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
+                    $customChatMessage = $this->customChatMessageFactory->create();
+                    $customChatMessage->setAuthorType($request->getParam('author_type'))
+                        ->setAuthorName('Anonymous')
+                        ->setMessage($request->getParam('author_message'))
+                        ->setWebsiteId($this->storeManager->getWebsite()->getId())
+                        ->setChatHash($chat_hash['guest_hash']);
+                    $customChatMessage->save();
+                }
+            }
 
             $data = [
                 'status' => self::STATUS_SUCCESS,

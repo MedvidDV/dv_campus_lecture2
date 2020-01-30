@@ -1,4 +1,4 @@
-define([
+define([// jscs:ignore internalError
     'jquery',
     'autocloseAlert',
     //'Magento_Ui/js/modal/alert',
@@ -153,7 +153,7 @@ define([
             var self = this;
 
             $.ajax({
-                url: 'send-message/collection/messages',
+                url: '/send-message/collection/messages',
                 dataType: 'json',
                 type: 'get',
                 context: this
