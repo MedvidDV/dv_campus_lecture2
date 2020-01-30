@@ -98,7 +98,11 @@ class Messages extends \Magento\Framework\App\Action\Action implements
                         ->getLastItem()
                         ->getData('chat_hash');
 
-                    $chat_hash['user_hash'] = $user_chat_hash;
+                    if ($user_chat_hash) {
+                        $chat_hash['user_hash'] = $user_chat_hash;
+                    } else {
+                        $chat_hash['user_hash'] = uniqid('chat_', true);
+                    }
                 }
 
                 if (array_key_exists('guest_hash', $chat_hash)) {
