@@ -1,10 +1,18 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<div class="custom-chat-btn-wrapper-top">
-    <a href="javascript:void(0)"
-       class="custom-chat-open-btn action "
-       title="<?= $block->escapeHtmlAttr(__('Open Chat'))?>"
-       data-mage-init='{"customChatOpenBtn":{}}'
-    >
-        <span class="text"><?= $block->escapeHtml(__('Open Chat')) ?></span>
-    </a>
+<div class="custom-chat-btn-wrapper-top" data-bind="scope: 'chatOpenBtnTop'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "chatOpenBtnTop": {
+                        "component": "customChatOpenBtn"
+                    }
+                }
+            }
+        }
+    }
+</script>

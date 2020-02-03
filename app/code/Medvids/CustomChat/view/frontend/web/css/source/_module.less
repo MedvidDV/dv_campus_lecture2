@@ -110,18 +110,20 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        opacity: 0;
         min-height: 350px;
         max-height: 98vh;
         position: fixed;
         right: -(@chat-width);
         top: 5px;
-        transition: right .3s;
+        transition: all .3s;
         width: @chat-width;
         z-index: 20;
 
         &.active {
+            opacity: 100%;
             right: 0;
-            transition: right .3s;
+            transition: all .3s;
         }
 
         .chat-header {
@@ -343,6 +345,17 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .custom-chat-btn-wrapper-floated {
         display: flex;
+        span {
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: -9999;
+
+
+            &.active {
+                opacity: 100%;
+                z-index: 100;
+            }
+        }
     }
     .custom-chat-btn-wrapper-top {
         display: none;
