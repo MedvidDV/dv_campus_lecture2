@@ -59,35 +59,44 @@ class Index extends \Magento\Framework\App\Action\Action implements
     public function execute()
     {
         $request = $this->getRequest();
+
         try {
             if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
                 throw new LocalizedException(__('Something went wrong, Please contact us if the issue persists'));
             }
 
-            if ($chat_hash = $this->customerSession->getData('chat_hash')) {
-                if ($this->customerSession->isLoggedIn()) {
-                    $customer = $this->customerSession->getCustomerData();
+            $chatHash = $this->customerSession->getData('chat_hash') ?? [];
 
-                    /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
-                    $customChatMessage = $this->customChatMessageFactory->create();
-                    $customChatMessage->setAuthorType($request->getParam('author_type'))
-                        ->setAuthorId($customer->getId())
-                        ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
-                        ->setMessage($request->getParam('author_message'))
-                        ->setWebsiteId($this->storeManager->getWebsite()->getId())
-                        ->setChatHash($chat_hash['user_hash']);
-                    $customChatMessage->save();
-                } else {
-                    /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
-                    $customChatMessage = $this->customChatMessageFactory->create();
-                    $customChatMessage->setAuthorType($request->getParam('author_type'))
-                        ->setAuthorName('Anonymous')
-                        ->setMessage($request->getParam('author_message'))
-                        ->setWebsiteId($this->storeManager->getWebsite()->getId())
-                        ->setChatHash($chat_hash['guest_hash']);
-                    $customChatMessage->save();
-                }
+            if ($this->customerSession->isLoggedIn()) {
+                $customer = $this->customerSession->getCustomerData();
+
+                /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
+                $customChatMessage = $this->customChatMessageFactory->create();
+                $customChatMessage->setAuthorType($request->getParam('author_type'))
+                    ->setAuthorId($customer->getId())
+                    ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
+                    ->setMessage($request->getParam('author_message'))
+                    ->setWebsiteId($this->storeManager->getWebsite()->getId());
+
+                array_key_exists('user_hash', $chatHash) ?: $chatHash['user_hash'] = uniqid('chat_', true);
+
+                $customChatMessage->setChatHash($chatHash['user_hash']);
+                $customChatMessage->save();
+            } else {
+
+                /** @var \Medvids\CustomChat\Model\CustomChat $customChatMessage */
+                $customChatMessage = $this->customChatMessageFactory->create();
+                $customChatMessage->setAuthorType($request->getParam('author_type'))
+                    ->setAuthorName('Anonymous')
+                    ->setMessage($request->getParam('author_message'))
+                    ->setWebsiteId($this->storeManager->getWebsite()->getId());
+
+                array_key_exists('guest_hash', $chatHash) ?: $chatHash['guest_hash'] = uniqid('chat_', true);
+
+                $customChatMessage->setChatHash($chatHash['guest_hash']);
+                $customChatMessage->save();
             }
+            $this->customerSession->setChatHash($chatHash);
 
             $data = [
                 'status' => self::STATUS_SUCCESS,
@@ -102,6 +111,7 @@ class Index extends \Magento\Framework\App\Action\Action implements
             ];
         }
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+
         return $controllerResult->setData($data);
     }
 }

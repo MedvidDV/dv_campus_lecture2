@@ -4,16 +4,16 @@ define([// jscs:ignore internalError
     'uiComponent',
     'autocloseAlert',
     //'Magento_Ui/js/modal/alert',
-    'jquery/ui',
-    'mage/translate'
-], function ($, ko, Component, alert) {
+    'Magento_Customer/js/customer-data'
+], function ($, ko, Component, alert, customerData) {
     'use strict';
 
     return Component.extend({
         defaults: {
             template: 'Medvids_CustomChat/chat',
             chatActiveClass: ko.observable(''),
-            messageCollection: ko.observableArray([]),
+            messageCollection: customerData.get('customer-chatmessages'),
+            customerMessages: ko.observableArray([]),
             messageText: ko.observable(''),
             getMessagesAction: '',
             submitMessageAction: ''
@@ -41,38 +41,17 @@ define([// jscs:ignore internalError
 
         /** get initial 10 messages for user */
         getMessages: function () {
-            $.ajax({
-                url: this.submitMessageAction,
-                dataType: 'json',
-                type: 'get',
-                context: this
-            }).done(function (response) {
-                if (response.messages.length) {
-                    this.messageCollection(response.messages);
-                } else {
-                    this.messageCollection([{
-                        'message': 'How may I help you?',
-                        'authorType': 'admin',
-                        'createdAt': this.getCurrentTime()
-                    }]);
-                }
-            }).fail(function () {
-                this.messageCollection(
-                    [
-                        {
-                            'message': 'I\'m sorry, we couldn\'t load message history right now',
-                            'authorType': 'system'
-                        },
-                        {
-                            'message': 'How may I help you?',
-                            'authorType': 'admin',
-                            'createdAt': this.getCurrentTime()
-                        }
-                    ]
-                );
-            }).always(function () {
-                this.scrollToLastMessage();
-            });
+            if (this.messageCollection().messages.length) {
+                this.customerMessages(this.messageCollection().messages);
+            } else {
+                this.customerMessages([{
+                    'message': 'How may I help you?',
+                    'authorType': 'admin',
+                    'createdAt': this.getCurrentTime()
+                }]);
+            }
+
+            this.scrollToLastMessage();
         },
 
         /** open chat body */
@@ -83,7 +62,7 @@ define([// jscs:ignore internalError
 
         /** Scroll to the last message */
         scrollToLastMessage: function () {
-            var id = '[data-repeat-index=' + (this.messageCollection().length - 1) + ']';
+            var id = '[data-repeat-index=' + (this.customerMessages().length - 1) + ']';
 
             $('.message' + id).get(0).scrollIntoView();
         },
@@ -102,7 +81,7 @@ define([// jscs:ignore internalError
             formData.append('form_key', $.mage.cookies.get('form_key'));
 
             $.ajax({
-                url: this.getMessagesAction,
+                url: this.submitMessageAction,
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -119,7 +98,7 @@ define([// jscs:ignore internalError
                     buttons: []
                 });
 
-                this.messageCollection.push(
+                this.customerMessages.push(
                     {
                         'authorType': 'user',
                         'message': this.messageText(),

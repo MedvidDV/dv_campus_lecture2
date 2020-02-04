@@ -21,7 +21,7 @@
     </div>
     <div id="custom-chat-chat-history" class="chat-history element-field">
         <ul class="history-list">
-            <li repeat="foreach: messageCollection, item: '$message'"
+            <li repeat="foreach: customerMessages, item: '$message'"
                 data-bind="attr: {class: 'message-' + $message().authorType + ' message'}">
                 <span class="message-body" text="$message().message">
                 </span>
