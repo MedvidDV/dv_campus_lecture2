@@ -14,7 +14,6 @@ define([
             messageCollection: customerData.get('customer-chatmessages'),
             customerMessages: ko.observableArray([]),
             messageText: ko.observable(''),
-            getMessagesAction: '',
             submitMessageAction: ''
         },
 
@@ -40,7 +39,7 @@ define([
 
         /** get initial 10 messages for user */
         getMessages: function () {
-            if (this.messageCollection().messages.length) {
+            if (this.messageCollection().messages && this.messageCollection().messages.length) {
                 this.customerMessages(this.messageCollection().messages);
             } else {
                 this.customerMessages([{

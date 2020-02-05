@@ -1,8 +1,9 @@
 define([
     'jquery',
     'ko',
-    'uiComponent'
-], function ($, ko, Component) {
+    'uiComponent',
+    'Magento_Customer/js/customer-data'
+], function ($, ko, Component, customerData) {
     'use strict';
 
     return Component.extend({
@@ -25,7 +26,9 @@ define([
 
         /** show button on chat closing */
         showButton: function () {
-            this.buttonActiveClass('active');
+            if (customerData.get('customer-chatmessages')) {
+                this.buttonActiveClass('active');
+            }
         }
     });
 });
