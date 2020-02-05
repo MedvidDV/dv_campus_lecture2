@@ -3,9 +3,9 @@
 @theme_chat_color_main: @color-blue-dodger;
 @chat_body_background: @color-white;
 @chat_input_background: @color-white;
-@chat_color_text_messages_user: #333;
+@chat_color_text_messages_customer: #333;
 @chat_color_text_messages_admin: #333;
-@chat_background_messages_user: @color-yellow-light2;
+@chat_background_messages_customer: @color-yellow-light2;
 @chat_background_messages_admin: @color-gray91;
 @chat_header_text_color: @color-white-fog;
 @chat-width: 350px;
@@ -235,7 +235,7 @@
                 &.message-admin {
                     align-self: flex-start;
                     background-color: @chat_background_messages_admin;
-                    color: @chat_color_text_messages_user;
+                    color: @chat_color_text_messages_customer;
 
                     &:after {
                         border-top: 10px solid @chat_background_messages_admin;
@@ -247,13 +247,13 @@
                     }
                 }
 
-                &.message-user {
+                &.message-customer {
                     align-self: flex-end;
-                    background-color: @chat_background_messages_user;
-                    color: @chat_color_text_messages_user;
+                    background-color: @chat_background_messages_customer;
+                    color: @chat_color_text_messages_customer;
 
                     &:after {
-                        border-top: 10px solid @chat_background_messages_user;
+                        border-top: 10px solid @chat_background_messages_customer;
                         border-left: 10px solid transparent;
                         bottom: 0;
                         content: '';

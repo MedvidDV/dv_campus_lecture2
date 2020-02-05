@@ -68,43 +68,45 @@ class CustomChat implements \Magento\Customer\CustomerData\SectionSourceInterfac
         $messages = [];
 
         try {
-            if ($chatHash = $this->customerSession->getData('chat_hash')) {
-                if ($this->customerSession->isLoggedIn()) {
-                    $customer = $this->customerSession->getCustomerData();
+            $chatHash = $this->customerSession->getData('chat_hash') ?? [];
 
-                    if (!array_key_exists('user_hash', $chatHash)) {
-                        /** @var string $customerChatHash getting user last message hash  */
-                        $chatHash['user_hash'] = $this->collectionFactory->create()
-                                ->addFieldToFilter('author_id', $customer->getId())
-                                ->addFieldToFilter('author_type', 'user')
-                                ->setPageSize(1)
-                                ->getFirstItem()
-                                ->getData('chat_hash')
-                            ?? uniqid('chat_', true);
-                    }
+            if ($this->customerSession->isLoggedIn()) {
+                $customer = $this->customerSession->getCustomerData();
 
-                    if (array_key_exists('guest_hash', $chatHash)) {
-                        $guestMessageCollection = $this->collectionFactory->create();
-
-                        /** @var \Magento\Framework\DB\Transaction $transaction */
-                        $transaction = $this->transactionFactory->create();
-                        $guestMessages = $guestMessageCollection
-                            ->addFieldToFilter('chat_hash', $chatHash['guest_hash'])
-                            ->addFieldToFilter('author_type', 'user');
-
-                        /** @var \Medvids\CustomChat\Model\CustomChat $guestMessage */
-                        foreach ($guestMessages as $guestMessage) {
-                            $message = $guestMessage->setChatHash($chatHash['user_hash'])
-                                ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
-                                ->setAuthorId($customer->getId());
-                            $transaction->addObject($message);
-                        }
-                        $transaction->save();
-
-                        unset($chatHash['guest_hash']);
-                    }
+                if (!array_key_exists('user_hash', $chatHash)) {
+                    /** @var string $customerChatHash getting user last message hash  */
+                    $chatHash['user_hash'] = $this->collectionFactory->create()
+                            ->addFieldToFilter('author_id', $customer->getId())
+                            ->addFieldToFilter('author_type', 'customer')
+                            ->setPageSize(1)
+                            ->getFirstItem()
+                            ->getData('chat_hash')
+                        ?? uniqid('chat_', true);
                 }
 
+                if (array_key_exists('guest_hash', $chatHash)) {
+                    $guestMessageCollection = $this->collectionFactory->create();
+
+                    /** @var \Magento\Framework\DB\Transaction $transaction */
+                    $transaction = $this->transactionFactory->create();
+                    $guestMessages = $guestMessageCollection
+                        ->addFieldToFilter('chat_hash', $chatHash['guest_hash'])
+                        ->addFieldToFilter('author_type', 'user');
+
+                    /** @var \Medvids\CustomChat\Model\CustomChat $guestMessage */
+                    foreach ($guestMessages as $guestMessage) {
+                        $message = $guestMessage->setChatHash($chatHash['user_hash'])
+                            ->setAuthorName($customer->getFirstname() . ' ' . $customer->getLastname())
+                            ->setAuthorId($customer->getId());
+                        $transaction->addObject($message);
+                    }
+                    $transaction->save();
+
+                    unset($chatHash['guest_hash']);
+                }
+            }
+
+            if ($chatHash) {
                 $this->customerSession->setChatHash($chatHash);
 
                 $messageCollection = $this->collectionFactory->create();
@@ -132,6 +134,7 @@ class CustomChat implements \Magento\Customer\CustomerData\SectionSourceInterfac
                     ];
                 }
             }
+
         } catch (LocalizedException $e) {
             $this->logger->error($e->getMessage());
         }

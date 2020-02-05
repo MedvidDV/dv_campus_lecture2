@@ -5,7 +5,7 @@
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
-    <type name="Medvids\CustomChat\Controller\Collection\Messages">
+    <type name="Medvids\CustomChat\CustomerData\CustomChat">
         <arguments>
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>

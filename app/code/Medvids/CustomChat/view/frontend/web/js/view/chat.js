@@ -1,11 +1,10 @@
-define([// jscs:ignore internalError
+define([
     'jquery',
     'ko',
     'uiComponent',
-    'autocloseAlert',
-    //'Magento_Ui/js/modal/alert',
-    'Magento_Customer/js/customer-data'
-], function ($, ko, Component, alert, customerData) {
+    'Magento_Customer/js/customer-data',
+    'Medvids_CustomChat/js/action/submit-message'
+], function ($, ko, Component, customerData, submitMessage) {
     'use strict';
 
     return Component.extend({
@@ -76,46 +75,28 @@ define([// jscs:ignore internalError
 
         /** Ajax submit message after validation */
         submitMessageAjax: function (form) {
-            var formData = new FormData(form);
+            var payload = {
+                'author_type': form['author_type'].value,
+                'hideit': form.hideit.value,
+                'author_message': form['author_message'].value,
+                'form_key': $.mage.cookies.get('form_key'),
+                isAjax: 1
+            };
 
-            formData.append('form_key', $.mage.cookies.get('form_key'));
-
-            $.ajax({
-                url: this.submitMessageAction,
-                data: formData,
-                processData: false,
-                contentType: false,
-                isAjax: 1,
-                type: 'post',
-                dataType: 'json',
-                context: this
-            })
-            .done(function (response) {
-                alert({
-                    modalClass: 'custom-chat-alert',
-                    title: response.title,
-                    content: response.message,
-                    buttons: []
-                });
-
+            submitMessage(payload, this.submitMessageAction)
+            .done(function () {
                 this.customerMessages.push(
                     {
-                        'authorType': 'user',
+                        'authorType': 'customer',
                         'message': this.messageText(),
                         'createdAt': this.getCurrentTime()
                     }
                 );
                 this.messageText('');
-            }).fail(function (error) {
-                alert({
-                    modalClass: 'custom-chat-alert',
-                    title: error.title,
-                    content: error.message,
-                    buttons: []
-                });
-            }).always(function () {
+            }.bind(this))
+            .always(function () {
                 this.scrollToLastMessage();
-            });
+            }.bind(this));
         }
     });
 });
