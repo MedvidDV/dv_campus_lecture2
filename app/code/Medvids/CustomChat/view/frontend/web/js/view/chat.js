@@ -9,12 +9,13 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'Medvids_CustomChat/chat',
             chatActiveClass: ko.observable(''),
             messageCollection: customerData.get('customer-chatmessages'),
             customerMessages: ko.observableArray([]),
             messageText: ko.observable(''),
-            submitMessageAction: ''
+            submitMessageAction: '',
+            /** admin image and name should be pulled from real admin in the future*/
+            adminImg: ko.observable(require.toUrl('Medvids_CustomChat/images/man.png'))
         },
 
         /** inheritdoc */

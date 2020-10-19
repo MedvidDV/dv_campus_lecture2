@@ -8,7 +8,6 @@ define([
 
     return Component.extend({
         defaults: {
-            template: 'Medvids_CustomChat/open_button',
             buttonActiveClass: ko.observable('active')
         },
 

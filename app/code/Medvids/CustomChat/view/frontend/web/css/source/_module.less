@@ -20,11 +20,13 @@
     .custom-chat-btn-wrapper-top {
         float: right;
         margin-top: 10px;
+
         &:after, &:before {
             content: ' ';
             display: table;
             clear: both;
         }
+
         &:after {
             clear: both;
         }
@@ -32,6 +34,7 @@
 
     .custom-chat-btn-wrapper-floated {
         display: none;
+
         span {
             align-items: center;
             animation: pulseShadow 2s infinite;
@@ -44,6 +47,7 @@
             position: fixed;
             right: 30px;
             width: 70px;
+
             .custom-chat-open-btn {
                 &:before {
                     color: @color-white;
@@ -55,10 +59,12 @@
 
         &.refresh {
             z-index: 25;
+
             span {
                 animation: none;
                 background-color: @color-red9;
                 right: 120px;
+
                 .custom-chat-refresh-btn {
                     &:before {
                         color: @color-white;
@@ -74,9 +80,11 @@
         display: inline-block;
         position: relative;
         text-decoration: none;
+
         &:hover {
             text-decoration: none;
         }
+
         &:before {
             color: @color-gray46;
             content: "\e96d";
@@ -85,6 +93,7 @@
             line-height: 28px;
             margin: 0 10px 0;
         }
+
         .text {
             height: 1px;
             opacity: 0;
@@ -146,11 +155,13 @@
                     height: 50px;
                     width: 50px;
                 }
+
                 .contact-info-block {
                     margin-left: 10px;
                 }
             }
         }
+
         button {
             .btn-title {
                 height: 1px;
@@ -168,9 +179,11 @@
         box-shadow: none;
         color: @chat_header_text_color;
         cursor: pointer;
+
         &:hover {
             color: darken(@chat_header_text_color, 10);
         }
+
         &::before {
             content: '\e61f';
             font-family: 'luma-icons';
@@ -182,11 +195,13 @@
     #custom-chat-contact-info-name {
         font-weight: 800;
     }
+
     #custom-chat-contact-info-status {
         align-items: center;
         display: flex;
         font-size: 0.8em;
         position: relative;
+
         &:before {
             border-radius: 50%;
             content: '';
@@ -195,9 +210,11 @@
             margin-right: 5px;
             width: 8px;
         }
+
         &.custom-chat-offline::before  {
             background: @color-red10;
         }
+
         &.custom-chat-online::before {
             background: @color-dark-green1;
         }
@@ -212,6 +229,7 @@
         &::-webkit-scrollbar{
             width: 4px;
         }
+
         &::-webkit-scrollbar-thumb{
             width: 2px;
             background: @color-gray76;
@@ -277,6 +295,7 @@
             }
         }
     }
+
     #custom-chat-send-message.element-field {
         .message-field {
             align-items: center;
@@ -292,6 +311,7 @@
                 height: 1px;
                 position: absolute;
             }
+
             .control {
                 width: 100%;
                 margin-right: 5px;
@@ -317,9 +337,12 @@
                 justify-content: center;
                 position: relative;
                 width: 40px;
+                align-items: center;
+
                 &:hover {
                     background-color: darken(@theme_chat_color_main, 5);
                 }
+
                 &::before {
                     color: @chat_input_background;
                     content: @icon-envelope;
@@ -329,6 +352,7 @@
             }
         }
     }
+
     @keyframes pulseShadow {
         0% {
             box-shadow: 0 0 0 0 rgba(0,0,0,0.4);
@@ -345,6 +369,7 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .custom-chat-btn-wrapper-floated {
         display: flex;
+
         span {
             opacity: 0;
             transition: all 0.3s;
@@ -357,9 +382,11 @@
             }
         }
     }
+
     .custom-chat-btn-wrapper-top {
         display: none;
     }
+
     .custom-chat-body-wrapper {
         max-height: 75vh;
     }
