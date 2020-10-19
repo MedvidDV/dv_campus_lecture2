@@ -1,18 +1,12 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<div class="custom-chat-btn-wrapper-top" data-bind="scope: 'chatOpenBtnTop'">
+<div id="custom-chat-btn-wrapper-top" class="custom-chat-btn-wrapper-top" data-bind="scope: 'chatOpenBtnTop'">
     <!-- ko template: getTemplate() --><!-- /ko -->
-</div>
 
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "chatOpenBtnTop": {
-                        "component": "customChatOpenBtn"
-                    }
-                }
+    <script type="text/x-magento-init">
+        {
+            "#custom-chat-btn-wrapper-top": {
+                "Magento_Ui/js/core/app": <?= $block->getJsLayout() ?>
             }
         }
-    }
-</script>
+    </script>
+</div>

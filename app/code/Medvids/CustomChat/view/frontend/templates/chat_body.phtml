@@ -1,23 +1,17 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */?>
 
-<div data-bind="scope: 'customChatBody'">
+<div id="chat-body-wrapper" data-bind="scope: 'customChatBody'">
 <!--     ko template: getTemplate() --><!-- /ko -->
-</div>
 
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "customChatBody": {
-                        "component": "customChatChatBody",
-                        "submitMessageAction": "<?= $block->getUrl('send-message/submit') ?>",
-                        "adminImg": "<?= $block->escapeUrl($block->getViewFileUrl('Medvids_CustomChat::images/man.png')) ?>"
-                    }
-                }
+    <script type="text/x-magento-init">
+        {
+            "#chat-body-wrapper": {
+                "Magento_Ui/js/core/app": <?= $block->getJsLayout() ?>
             }
         }
-    }
-</script>
+    </script>
+</div>
+
+
 
 

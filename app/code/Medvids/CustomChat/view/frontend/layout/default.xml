@@ -7,6 +7,18 @@
                    name="custom.chat.open.button.top"
                    after="minicart"
                    template="Medvids_CustomChat::open_button_top.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="chatOpenBtnTop" xsi:type="array">
+                                <item name="component" xsi:type="string">customChatOpenBtn</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Medvids_CustomChat/open_button</item>
+                                    </item>
+                                </item>
+                            </item>
+                    </argument>
+                </arguments>
             </block>
         </referenceContainer>
         <referenceContainer name="before.body.end">
@@ -14,11 +26,36 @@
                    name="custom.chat.chat.body"
                    after="-"
                    template="Medvids_CustomChat::chat_body.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="customChatBody" xsi:type="array">
+                                <item name="component" xsi:type="string">customChatChatBody</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Medvids_CustomChat/chat</item>
+                                    <item name="submitMessageAction" xsi:type="url" path="send-message/submit" />
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
             </block>
             <block class="Magento\Framework\View\Element\Template"
                    name="custom.chat.open.button"
                    after="-"
                    template="Medvids_CustomChat::open_button.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="chatOpenBtn" xsi:type="array">
+                                <item name="component" xsi:type="string">customChatOpenBtn</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Medvids_CustomChat/open_button</item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
             </block>
 <!--            <block class="Magento\Framework\View\Element\Template"-->
 <!--                   name="custom.chat.refresh.button"-->

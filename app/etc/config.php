@@ -252,7 +252,6 @@ return [
         'Medvids_DealerAccountCreate' => 1,
         'Medvids_DemoController' => 1,
         'Medvids_Newsletter' => 1,
-        'Medvids_OwlCarouselModule' => 1,
         'Medvids_RecursiveData' => 1,
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1,
